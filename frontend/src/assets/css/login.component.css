@@ -1,0 +1,13 @@
+img{
+    width: 50%;
+}
+.mb-2{
+    text-align: center;
+}
+.link {
+    color: black;
+    text-align: center;
+  }
+.link:hover {
+     color: #00F
+}
