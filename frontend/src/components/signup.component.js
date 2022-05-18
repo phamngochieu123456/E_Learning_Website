@@ -13,11 +13,12 @@ export default class SignUp extends Component {
             type="text"
             className="form-control"
             placeholder="First name"
+            required 
           />
         </div>
         <div className="mb-3">
           <label>Last name</label>
-          <input type="text" className="form-control" placeholder="Last name" />
+          <input type="text" className="form-control" placeholder="Last name" required/>
         </div>
         <div className="mb-3">
           <label>Email address</label>
@@ -25,6 +26,7 @@ export default class SignUp extends Component {
             type="email"
             className="form-control"
             placeholder="Enter email"
+            required
           />
         </div>
         <div className="mb-3">
@@ -33,6 +35,7 @@ export default class SignUp extends Component {
             type="password"
             className="form-control"
             placeholder="Enter password"
+            required
           />
         </div>
         <div className="d-grid">
