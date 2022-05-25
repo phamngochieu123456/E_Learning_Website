@@ -90,6 +90,26 @@ accountctrl.getUserByAccountId = (req,res)=>{
   }
 }
 
+accountctrl.getUserByAccountId1 = (req,res)=>{
+  if(req.body)
+  {
+    accountmd.getUserByAccountId((err,User)=>{
+      if(err)
+      {
+        res.json({success:false, data:err})
+      }
+      else
+      {
+        res.json({success:true, data: User})
+      }
+    },req.body.id_account)
+  }
+  else
+  {
+    res.json({success: false, data: "Khong co req.body"})
+  }
+}
+
 accountctrl.getUserHome = (req,res)=>{
   try
   {

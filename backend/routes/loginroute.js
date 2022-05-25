@@ -15,6 +15,8 @@ router.get("/login/google/callback",passport.authenticate("google",{failureRedir
 
 router.get("/home",accountctrl.getUserHome)
 
+router.post("/getuserbyaccountid",accountctrl.getUserByAccountId1)
+
 router.get("/logout",(req,res)=>{
   req.session.destroy()
   res.redirect("login")
