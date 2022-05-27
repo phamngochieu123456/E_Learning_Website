@@ -24,29 +24,20 @@ accountctrl.verifyAccount = (req,res)=>{
       }
       else
       {
-        res.cookie("accesstoken",account.accesstoken,{
-          secure: false,
-          httpOnly: false,
-          sameSite: 'lax'
-        })
-        res.cookie("refreshtoken",account.refreshtoken,{
-          secure: false,
-          httpOnly: true,
-          sameSite: 'lax',
-          path: "/auth/jwt/getnewtoken"
-        })
         res.json({success: true, data: account})
       }
     },req.body.email, req.body.password)
   }
   else
   {
+    console.log("in account.vefifyaccount else")
+    
     res.json({success: false, data: "Ten dang nhap va mat khau khong nam trong req.body"})
   }
 }
 
 accountctrl.getnewtoken = (req,res)=>{
-  if(req.cookies.refreshtoken)
+  if(req.body.refreshtoken)
   {
     accountmd.getnewtoken((err,newaccesstoken)=>{
       if(err)
@@ -55,14 +46,9 @@ accountctrl.getnewtoken = (req,res)=>{
       }
       else
       {
-        res.cookie("accesstoken",newaccesstoken,{
-          secure: false,
-          httpOnly: false,
-          sameSite: 'lax'
-        })
         res.json({success: true, data: newaccesstoken})
       }
-    },req.cookies.refreshtoken)
+    },req.body.refreshtoken)
   }
   else
   {
@@ -89,7 +75,25 @@ accountctrl.getUserByAccountId = (req,res)=>{
     res.json({success: false, data: "Khong co req.user"})
   }
 }
-
+accountctrl.getUserByAccountId1=(req,res)=>{
+  if(req.body)
+  {
+    accountmd.getUserByAccountId((err,User)=>{
+      if(err)
+      {
+        res.json({success:false,data:err})
+      }
+      else
+      {
+        res.json({success:true,data:User})
+     }
+    },req.body.id_account)
+  }
+  else
+  {
+    res.json({success:false,data:"Khong co req.body"})
+  }
+}
 accountctrl.getUserHome = (req,res)=>{
   try
   {

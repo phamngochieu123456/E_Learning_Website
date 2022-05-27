@@ -1,9 +1,9 @@
-@import url('https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600,700,800');
 * {
   box-sizing: border-box;
 }
 body {
-  background-image: url(/src/assets/images/login_background.png) !important;
+  /* background-color: black !important; */
+  /* background-image: url(/src/assets/images/login_background.png) !important; */
   background-repeat: 'no-repeat';
   background-size: cover;
   background-position: center;

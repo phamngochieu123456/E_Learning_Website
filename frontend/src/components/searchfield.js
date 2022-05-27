@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import { Form, FormControl, Button } from "react-bootstrap";
-  export default class Search extends Component {
+export default class Search extends Component {
     state = {
         searchText: ""
       };
@@ -24,10 +23,10 @@ import { Form, FormControl, Button } from "react-bootstrap";
       };
     render() {
       return (
-        <Form className='d-flex'>
-            <FormControl type="text" placeholder="Search" className="mr-sm-2" onChange={this.handleSearchInput} value={this.state.searchtext}/>
-            <Button onClick={this.handleSearchSubmit} variant="outline-info">Search</Button>
-        </Form>
+        <form className="d-flex">
+          <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" onChange={this.handleSearchInput}/>
+          <button className="btn btn-outline-light" type="submit" onClick={this.handleSearchSubmit}>Search</button>
+        </form>
       )
     }
   }
