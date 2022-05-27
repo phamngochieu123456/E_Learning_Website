@@ -10,7 +10,10 @@ export default class NavbarLogged extends Component {
   componentDidMount = async() =>{
     try
     {
-      const payload = localStorage.getItem("id_account");
+      const account = localStorage.getItem("account");
+      const accountjson = JSON.parse(account)
+      const payload = accountjson.id_account
+
       const headers = {
         authorization: ' JWT fefege...' ,
         'Content-Type': 'application/json'
@@ -19,12 +22,8 @@ export default class NavbarLogged extends Component {
 
       if(res.data.success)
       {
-<<<<<<< Updated upstream
-          localStorage.setItem("account",JSON.stringify(res.data.data))
-          console.log("again" )
-=======
           localStorage.setItem("user",JSON.stringify(res.data.data))
->>>>>>> Stashed changes
+          console.log("again" )
       }
     }
     catch(err)
@@ -70,9 +69,8 @@ export default class NavbarLogged extends Component {
                   <SearchPage />
                 </li>
                 <li className="nav-item">
-                    <NavDropdown title={localStorage.getItem("name_account")} id="navbarScrollingDropdown">
+                    <NavDropdown title={JSON.parse(localStorage.getItem("account")).name_account} id="navbarScrollingDropdown">
                     <NavDropdown.Item href="/account-profile">Profile</NavDropdown.Item>
-                    <NavDropdown.Item href="/settings">Settings</NavDropdown.Item>
                     <NavDropdown.Item href="#action4">My Purchases</NavDropdown.Item>
                     <NavDropdown.Item href="#action4">Accomplishments</NavDropdown.Item>
                     <NavDropdown.Item href="#action4">Help Center</NavDropdown.Item>

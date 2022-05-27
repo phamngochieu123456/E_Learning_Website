@@ -2,11 +2,10 @@ import axios from 'axios'
 import React, { Component } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 import '../../assets/css/home.css'
-import Cardcourse from '../Card/cardcourse.component'
+import Cardcourse from '../cardcourse.component'
 export default class Dashboard extends Component {
   componentDidMount()
   {
-
     async function islogin()
     {
       try
