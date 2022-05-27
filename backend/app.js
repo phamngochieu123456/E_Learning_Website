@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 const session = require('express-session')
 const passport = require("passport")
+var cors = require('cors')
 
 const loginroute = require("./routes/loginroute")
 const authroute = require("./routes/authroute")
@@ -11,6 +12,7 @@ const videoroute = require("./routes/videoroute")
 
 const app = express()
 
+app.use(cors())
 app.set('view engine', 'ejs');
 app.use(express.static("./public"))
 app.use(bodyParser.json())

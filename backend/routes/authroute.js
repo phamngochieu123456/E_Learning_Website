@@ -4,8 +4,7 @@ const path = require("path")
 const passport = require("passport")
 const accountctrl = require("../controllers/accountctrl")
 
-router.post("/jwt",passport.authenticate("jwt",{session:false}),(req,res,next)=>{
-  req.session.jwt = {user: req.user}
+router.post("/jwt",passport.authenticate("jwt",{session:true}),(req,res,next)=>{
   next()
 },accountctrl.getUserByAccountId)
 

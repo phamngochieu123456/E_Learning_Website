@@ -42,10 +42,3 @@
 #navbarTogglerDemo01{
   justify-content: flex-end;
 }
-#sign-up{
-  background-color: white;
-  border-radius: 20%;
-}
-.nav-link{
-  margin: 5px;
-}

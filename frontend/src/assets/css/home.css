@@ -1,0 +1,11 @@
+.img-fluid{
+    width: max-content;
+    background-color: white ;
+    border-radius: 5%;
+}
+.container-fluid{
+    margin-top: 5%;
+}
+.auth-wrapper{
+    margin-top: 3%;
+}
