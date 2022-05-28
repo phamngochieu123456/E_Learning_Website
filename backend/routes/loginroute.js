@@ -16,16 +16,13 @@ router.post("/getuserbyaccountid",accountctrl.getUserByAccountId1)
 router.get("/logout",(req,res)=>{
   console.log("in logout")
   req.session.destroy()
-  res.redirect("login")
+  res.end()
 })
 
 router.route("/islogin")
   .get((req,res)=>{
     if(req.user)
     {
-
-      console.log(JSON.stringify(req.user))
-
       res.json({success: true, data: req.user})
     }
     else

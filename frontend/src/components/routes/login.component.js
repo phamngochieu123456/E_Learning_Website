@@ -29,16 +29,20 @@ export default class Login extends Component {
     {
       event.preventDefault();
       const payload = this.state;
-      const headers = {
-        authorization: ' JWT fefege...' ,
-        'Content-Type': 'application/json'
+      const config = {
+        method: 'post',
+        url: 'http://localhost:5000/user/login',
+        withCredentials: true,
+        data: payload,
+        headers: {
+          authorization: ' JWT fefege...' ,
+          'Content-Type': 'application/json'
+        }    
       }
-      const res = await axios.post("http://localhost:5000/user/login",payload,{headers})
+      const res = await axios(config)
 
       if(res.data.success)
       {
-          // localStorage.setItem("name_account",res.data.data.user.name_account)
-          // localStorage.setItem("id_account",res.data.data.user.id_account)
           localStorage.setItem("accesstoken",res.data.data.accesstoken)
           localStorage.setItem("refreshtoken",res.data.data.refreshtoken)
           authjwt()
@@ -48,7 +52,6 @@ export default class Login extends Component {
           this.state.loginError = res.data.data
           alert(this.state.loginError)
       }
-      console.log(JSON.stringify(res))
     }
     catch(err)
     {
@@ -57,7 +60,7 @@ export default class Login extends Component {
   }
   handleLoginGG = async (event) => {
     event.preventDefault()
-    window.open("http://localhost:5000/user/login/google")
+    window.location.href = "http://localhost:5000/user/login/google"
   }
   renderContent() {
     return (

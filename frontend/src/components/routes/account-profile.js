@@ -8,7 +8,7 @@ export default class Account_profile extends Component {
 
   constructor(props){
       super(props);
-      const account = JSON.parse(localStorage.getItem("account"));
+      const account = JSON.parse(localStorage.getItem("user"));
       this.state={
         username: account.name_user,
         profileImage: account.avatar_user,
