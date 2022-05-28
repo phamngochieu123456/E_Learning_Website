@@ -29,9 +29,7 @@ accountctrl.verifyAccount = (req,res)=>{
     },req.body.email, req.body.password)
   }
   else
-  {
-    console.log("in account.vefifyaccount else")
-    
+  {    
     res.json({success: false, data: "Ten dang nhap va mat khau khong nam trong req.body"})
   }
 }

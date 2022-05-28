@@ -3,10 +3,9 @@ const { default: NavbarLogged } = require("./navbarlogged");
 const { default: NavbarUnlogged } = require("./navbarUnlogged");
 
 export const Navbar = () =>{
-    const name_account = localStorage.getItem("name_account")
+    const account = localStorage.getItem("account")
     const RenderMenu = () =>{
-        
-        if (name_account){
+        if (account){
             return(
                 <>
                 <NavbarLogged/>

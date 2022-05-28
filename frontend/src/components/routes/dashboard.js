@@ -10,12 +10,21 @@ export default class Dashboard extends Component {
     {
       try
       {
-        const res = await axios.get("http://localhost:5000/user/islogin")
+        const config = {
+          method: 'get',
+          url: 'http://localhost:5000/user/islogin',
+          withCredentials: true
+        }
+        const res = await axios(config)
         if(res.data.success)
         {
-          localStorage.setItem("name_account",res.data.data.name_account)
-          localStorage.setItem("id_account",res.data.data.id_account)
-          window.location.reload()
+          localStorage.setItem("account",JSON.stringify(res.data.data))
+          const islogin = localStorage.getItem("islogin")
+          if(!islogin)
+          {
+            localStorage.setItem("islogin",true)
+            window.location.reload()
+          }
         }
         else
         {

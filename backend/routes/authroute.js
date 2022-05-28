@@ -4,9 +4,7 @@ const path = require("path")
 const passport = require("passport")
 const accountctrl = require("../controllers/accountctrl")
 
-router.post("/jwt",passport.authenticate("jwt",{session:true}),(req,res,next)=>{
-  next()
-},accountctrl.getUserByAccountId)
+router.post("/jwt",passport.authenticate("jwt",{session:true}),accountctrl.getUserByAccountId)
 
 router.post("/jwt/getnewtoken",accountctrl.getnewtoken)
 

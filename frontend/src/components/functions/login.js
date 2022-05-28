@@ -8,7 +8,8 @@ export async function authjwt()
     const config = {
       method: 'post',
       url: 'http://localhost:5000/auth/jwt',
-      headers: { 'Authorization': "Bearer " + accesstoken }
+      withCredentials: true,
+      headers: { 'Authorization': "Bearer " + accesstoken}
     }
     const res = await axios(config)
     if(res.data.success)
@@ -48,7 +49,8 @@ export async function authjwtagain()
       const config = {
         method: 'post',
         url: 'http://localhost:5000/auth/jwt',
-        headers: { 'Authorization': "Bearer " + res.data.data }
+        withCredentials: true,
+        headers: { 'Authorization': "Bearer " + res.data.data}
       }
       const res1 = await axios(config)
       
