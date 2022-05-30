@@ -71,10 +71,10 @@ export default class NavbarLogged extends Component {
                 <li className="nav-item">
                     <NavDropdown title={JSON.parse(localStorage.getItem("account")).name_account} id="navbarScrollingDropdown">
                     <NavDropdown.Item href="/account-profile">Profile</NavDropdown.Item>
+                    <NavDropdown.Item href="/settings">Settings</NavDropdown.Item>
                     <NavDropdown.Item href="#action4">My Purchases</NavDropdown.Item>
                     <NavDropdown.Item href="#action4">Accomplishments</NavDropdown.Item>
                     <NavDropdown.Item href="#action4">Help Center</NavDropdown.Item>
-
                     <NavDropdown.Divider />
                     <Logout />
                     </NavDropdown>

@@ -7,7 +7,7 @@ export default class Cardcourse extends Component {
     return (
         <div style={{margin:10}}>
             <Card>
-            <Card.Header>-CourseType-</Card.Header>
+            <Card.Img src='https://i.ytimg.com/vi/WUNWhIjUF2Y/hqdefault.jpg'></Card.Img>
             <Card.Body>
                 <Card.Title>Course Title</Card.Title>
                 <Card.Text>

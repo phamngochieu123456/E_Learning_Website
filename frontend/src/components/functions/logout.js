@@ -20,8 +20,7 @@ export const Logout = () =>{
             localStorage.removeItem("islogin")
             localStorage.removeItem("accesstoken")
             localStorage.removeItem("refreshtoken")
-            navigate("/login")
-            window.location.reload();
+            window.location.href = "http://localhost:3000/login"
         }
         catch(err)
         {
@@ -52,7 +51,7 @@ export const Logout = () =>{
 
     // }
     return(
-        <NavDropdown.Item href="/login" onClick={handleClick}>Logout</NavDropdown.Item>
+        <NavDropdown.Item onClick={handleClick}>Logout</NavDropdown.Item>
 
     )
 } 
