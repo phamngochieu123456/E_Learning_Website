@@ -19,8 +19,12 @@ export default class NavbarLogged extends Component {
 
       if(res.data.success)
       {
+<<<<<<< Updated upstream
           localStorage.setItem("account",JSON.stringify(res.data.data))
           console.log("again" )
+=======
+          localStorage.setItem("user",JSON.stringify(res.data.data))
+>>>>>>> Stashed changes
       }
     }
     catch(err)
@@ -68,6 +72,7 @@ export default class NavbarLogged extends Component {
                 <li className="nav-item">
                     <NavDropdown title={localStorage.getItem("name_account")} id="navbarScrollingDropdown">
                     <NavDropdown.Item href="/account-profile">Profile</NavDropdown.Item>
+                    <NavDropdown.Item href="/settings">Settings</NavDropdown.Item>
                     <NavDropdown.Item href="#action4">My Purchases</NavDropdown.Item>
                     <NavDropdown.Item href="#action4">Accomplishments</NavDropdown.Item>
                     <NavDropdown.Item href="#action4">Help Center</NavDropdown.Item>

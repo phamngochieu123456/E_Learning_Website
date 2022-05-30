@@ -14,6 +14,7 @@ router.get("/home",accountctrl.getUserHome)
 router.post("/getuserbyaccountid",accountctrl.getUserByAccountId1)
 
 router.get("/logout",(req,res)=>{
+  console.log("in logout")
   req.session.destroy()
   res.redirect("login")
 })

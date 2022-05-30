@@ -15,25 +15,20 @@ import Errorpages from './components/routes/errorpages';
 import Account_profile from './components/routes/account-profile';
 import './assets/css/home.css'
 import CourseDetail from './components/routes/coursedetail';
+import InProgress from './components/routes/in-progress';
+import Completed from './components/routes/complete';
+import Learn from './components/routes/learn';
+import LearnWeek from './components/routes/learn.week';
+import Settings from './components/routes/setting';
 
 function App() {
-  const value = localStorage.getItem('state')
+  const value = localStorage.getItem('islogin')
   return (
     <Router>
       <div className="App">
         <header>
             <Navbar/>
         </header>
-            {/* <Routes>
-              <Route exact path="/" element={<Homepage />} />
-              <Route path="/login" element={value==="true"?<Navigate to="/dashboard" />:<div className="auth-wrapper"><Login /></div>}/>
-              <Route path="/sign-up" element={value==="true"?<Navigate to="/dashboard" />:<div className="auth-wrapper"><SignUp /></div>}/>
-              <Route path="/forgot-password" element={value==="true"?<Navigate to="/dashboard" />:<div className="auth-wrapper"><ForgotPassword /></div>}/>
-              <Route path="/dashboard" element={value==="false"?<Navigate to="/login" />:<Dashboard />}/>
-              <Route path="/course-details" element={value==="false"?<Navigate to="/login" />:<CourseDetail />}/>
-              <Route path="/account-profile" element={value==="false"?<Navigate to="/login" />:<div className="auth-wrapper"><Account_profile /></div>}/>
-              <Route path="*" element={<Errorpages />}/>
-            </Routes> */}
             <Routes>
               <Route exact path="/" element={<Homepage />} />
               <Route path="/login" element={<div className="auth-wrapper"><Login /></div>}/>
@@ -42,6 +37,11 @@ function App() {
               <Route path="/dashboard" element={<Dashboard />}/>
               <Route path="/course-details" element={value==="false"?<Navigate to="/login" />:<CourseDetail />}/>
               <Route path="/account-profile" element={value==="false"?<Navigate to="/login" />:<div className="auth-wrapper"><Account_profile /></div>}/>
+              <Route path="/settings" element={value==="false"?<Navigate to="/login" />:<div className="auth-wrapper"><Settings /></div>}/>
+              <Route path="/in-progress" element={value==="false"?<Navigate to="/login" />:<InProgress />}/>
+              <Route path="/completed" element={value==="false"?<Navigate to="/login" />:<Completed />}/>
+              <Route path="/learn" element={value==="false"?<Navigate to="/login" />:<Learn />}/>
+              <Route path="/learn/week" element={value==="false"?<Navigate to="/login" />:<LearnWeek />}/>
               <Route path="*" element={<Errorpages />}/>
             </Routes>
         <footer>
