@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { Component } from 'react'
 import { Col, Nav, Row, Tab } from 'react-bootstrap'
 import '../../assets/css/home.css'
+import CardcourseW from '../Card/card.week'
 import LearnLecture from './learn.lecture'
 export default class LearnWeek extends Component {
   componentDidMount()
@@ -46,15 +47,8 @@ export default class LearnWeek extends Component {
             <Row>
                 <Col sm={3}>
                 <Nav variant="pills" className="flex-column bg-light">
-                    <Nav.Item>
-                    <Nav.Link eventKey="first">Navigation and Navigation Bar</Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item>
-                    <Nav.Link eventKey="second">User Input: Buttons and Forms</Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item>
-                    <Nav.Link eventKey="third">Displaying Content: Tables and Cards</Nav.Link>
-                    </Nav.Item>
+                    <CardcourseW />
+                    <CardcourseW />
                 </Nav>
                 </Col>
                 <Col sm={9}>

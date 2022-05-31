@@ -1,29 +1,25 @@
 import React, { Component } from 'react'
-import { Card } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import { Nav } from 'react-bootstrap'
 
 export default class CardcourseW extends Component {
   render() {
     return (
-        <div style={{margin:10}}>
-            <Card>
-                  <Link className="btn btn-primary" to={'/course-details'}>
-                    Overview
-                  </Link>
-                  <Link className="btn btn-primary" to={'/course-details'}>
-                    Grade
-                  </Link>
-                  <Link className="btn btn-primary" to={'/course-details'}>
-                    Notes
-                  </Link>
-                  <Link className="btn btn-primary" to={'/course-details'}>
-                    Discussion Forum
-                  </Link>
-                  <Link className="btn btn-primary" to={'/course-details'}>
-                    Message
-                  </Link>
-            </Card>
-        </div>
+      <>
+      <Nav.Item className="btn btn-light" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="true" aria-controls="collapseExample">
+      Navigation and Navigation Bar
+      </Nav.Item>
+      <div className="collapse show" id="collapseExample">
+      <Nav.Item>
+      <Nav.Link eventKey="first">Navigation and Navigation Bar</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+      <Nav.Link eventKey="second">User Input: Buttons and Forms</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+      <Nav.Link eventKey="third">Displaying Content: Tables and Cards</Nav.Link>
+      </Nav.Item>
+      </div>
+      </>
     )
   }
 }   

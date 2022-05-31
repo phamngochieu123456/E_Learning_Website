@@ -21,6 +21,7 @@
     "react-dom": "^18.1.0",
     "react-hook-form": "^7.31.1",
     "react-icons": "^4.3.1",
+    "react-player": "^2.10.1",
     "react-rating-stars-component": "^2.2.0",
     "react-redux": "^8.0.1",
     "react-router-dom": "^6.3.0",
@@ -28,6 +29,7 @@
     "react-social-icons": "^5.13.0",
     "react-social-login": "^3.4.15",
     "react-social-login-buttons": "^3.6.0",
+    "styled-components": "^5.3.5",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

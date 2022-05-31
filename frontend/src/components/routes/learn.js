@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { Component } from 'react'
-import { Card, Container, Dropdown, Row } from 'react-bootstrap'
+import { Card, Container, Dropdown, Nav, Row } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import '../../assets/css/home.css'
 export default class Learn extends Component {
@@ -46,17 +46,20 @@ export default class Learn extends Component {
               <Row>
                 <div style={{margin:10}}>
                   <Card style={{margin:10}}>
-                        <Dropdown >
-                          <Dropdown.Toggle variant="light" id="dropdown-basic" style={{width:'100%'}}>
-                          Overview
-                          </Dropdown.Toggle>
-
-                          <Dropdown.Menu style={{width:'100%',textAlign:'center'}}>
-                            <Dropdown.Item href="learn/week">Week 1</Dropdown.Item>
-                            <Dropdown.Item href="#/action-2">Week 2</Dropdown.Item>
-                            <Dropdown.Item href="#/action-3">Week 3</Dropdown.Item>
-                          </Dropdown.Menu>
-                        </Dropdown>
+                  <Nav.Item className="btn btn-light" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="true" aria-controls="collapseExample">
+                    Overview
+                    </Nav.Item>
+                    <div className="collapse show" id="collapseExample">
+                    <Nav.Item>
+                    <Nav.Link href='/learn/week'>Week 1</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                    <Nav.Link href='/learn/week'>Week 2</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                    <Nav.Link href='/learn/week'>Week 3</Nav.Link>
+                    </Nav.Item>
+                    </div>
                   </Card>
                   <Card style={{margin:10}}>
                     <Link className="btn btn-light" to={'/course-details'}>

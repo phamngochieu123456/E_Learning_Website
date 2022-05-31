@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { BsBoxArrowInRight } from 'react-icons/bs';
-import profileImage from '../../assets/images/profile.png';
 import '../../assets/css/login.component.css'
 import axios from 'axios'
 
@@ -10,11 +9,8 @@ export default class Settings extends Component {
       super(props);
       const account = JSON.parse(localStorage.getItem("user"));
       this.state={
-        username: account.name_user,
-        profileImage: account.avatar_user,
-        phoneNumber: account.phone_user,
-        Birth: account.birth_user.substr(0,10),
-        Gender: account.sex_user,
+        password: account.password,
+        rePassword: account.rePassword,
     }
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -51,70 +47,31 @@ export default class Settings extends Component {
       <div className="auth-inner">
         <div className="mb-2">
               <section>
-                  <p style={{fontSize:30}}>Edit my profile</p>
+                  <p style={{fontSize:30}}>Change password</p>
               </section>
           </div>
           <hr/>
-          <div className="mb-2">
-            <img src={profileImage} alt=""></img>
-          </div>
           <div className="mb-3">
             <input
-              type="text"
-              name='username'
+              type="password"
+              name='password'
               className="form-control"
-              placeholder='User name'
-              defaultValue={this.state.username}
+              placeholder='password'
+              defaultValue={this.state.password}
               onChange={this.handleChange}
               required
             />
           </div>
           <div className="mb-3">
             <input
-              type="tel"
-              name='phoneNumber'
+              type="password"
+              name='rePassword'
               className="form-control"
-              placeholder="PhoneNumber"
-              defaultValue={this.state.phoneNumber}
+              placeholder="rePassword"
+              defaultValue={this.state.rePassword}
               onChange={this.handleChange}
               required
             />
-          </div>
-          <div className="mb-3">
-            <input
-              type="date"
-              name='birth'
-              className="form-control"
-              defaultValue={this.state.Birth}
-              onChange={this.handleChange}
-              required
-            />
-          </div>
-          <div className="mb-3">
-            <div className="radio">
-            <label>
-              <input
-                type="radio"
-                name='gender'
-                value="1"
-                defaultChecked={this.state.Gender ? '1' : ''}
-                onChange={this.handleChange}
-              />
-                Male
-            </label>
-            </div>
-            <div className="radio">
-                <label>
-                  <input
-                    type="radio"
-                    name='gender'
-                    value="0"
-                    defaultChecked={!this.state.Gender ? '0' : ''}
-                    onChange={this.handleChange}
-                  />
-                  Female
-                </label>
-            </div>
           </div>
           <hr/>
 

@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { Card, Row, Tab, Tabs } from 'react-bootstrap'
 import '../../assets/css/home.css'
-import ReactStars from "react-rating-stars-component";
+import ReactPlayer from 'react-player'
+import { GrDocumentPdf } from "react-icons/gr";
 
 export default class LearnLecture extends Component {
     ratingChanged = (newRating) => {
@@ -25,30 +26,18 @@ export default class LearnLecture extends Component {
                         </Card.Text>
                     </Tab>
                     <Tab eventKey="Video" title="Video">
-                        <Card.Title>Review</Card.Title>
-                        <ReactStars
-                            count={5}
-                            onChange={this.ratingChanged}
-                            size={50}
-                            activeColor="#ffd700"
-                        />
+                        <ReactPlayer url='https://www.youtube.com/watch?v=ysz5S6PUM-U' />
                     </Tab>
                     <Tab eventKey="Resourse" title="Resourse">
                         <Card.Title>Frequently Asked Questions</Card.Title>
                         <Card.Text className='d-flex'>
-                        Course description information.
+                            <GrDocumentPdf /> <a href=''>Tài liệu</a>
                         </Card.Text>
                         <Card.Text className='d-flex'>
-                        Course description information.
+                            <GrDocumentPdf /> <a href=''>Tài liệu</a>
                         </Card.Text>
                         <Card.Text className='d-flex'>
-                        Course description information.
-                        </Card.Text>
-                        <Card.Text className='d-flex'>
-                        Course description information.
-                        </Card.Text>
-                        <Card.Text className='d-flex'>
-                        Course description information.
+                            <GrDocumentPdf /> <a href=''>Tài liệu</a>
                         </Card.Text>
                     </Tab>
                     </Tabs>

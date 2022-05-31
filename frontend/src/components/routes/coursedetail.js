@@ -3,6 +3,7 @@ import { Card, Col, Container, Row, Tab, Tabs } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import '../../assets/css/home.css'
 import ReactStars from "react-rating-stars-component";
+import FAQ from '../Collapse/faq';
 
 export default class CourseDetail extends Component {
     ratingChanged = (newRating) => {
@@ -69,21 +70,12 @@ export default class CourseDetail extends Component {
                     </Tab>
                     <Tab eventKey="FAQ" title="FAQ">
                         <Card.Title>Frequently Asked Questions</Card.Title>
-                        <Card.Text className='d-flex'>
-                        Course description information.
-                        </Card.Text>
-                        <Card.Text className='d-flex'>
-                        Course description information.
-                        </Card.Text>
-                        <Card.Text className='d-flex'>
-                        Course description information.
-                        </Card.Text>
-                        <Card.Text className='d-flex'>
-                        Course description information.
-                        </Card.Text>
-                        <Card.Text className='d-flex'>
-                        Course description information.
-                        </Card.Text>
+                        <FAQ></FAQ>
+                        <FAQ></FAQ>
+                        <FAQ></FAQ>
+                        <FAQ></FAQ>
+                        <FAQ></FAQ>
+
                     </Tab>
                     </Tabs>
                 </Card.Body>

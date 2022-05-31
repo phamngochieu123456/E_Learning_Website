@@ -25,10 +25,6 @@ export default class CardcourseIP extends Component {
                                     <Link className="btn btn-primary" to={'/learn'}>
                                         Go To Course
                                     </Link>
-                                    <hr></hr>
-                                    <button className="bg-white" style={{color:'black', width:'100%', borderRadius:10}}>
-                                        Reset deadlines
-                                    </button>
                                 </Card.Body>
                             </Col>
                     </Row>

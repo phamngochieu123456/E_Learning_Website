@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { BsBoxArrowInRight } from 'react-icons/bs';
 import Logo from '../assets/images/DUT-Academy.png';
 import loginStyle from '../assets/css/login.component.css'
-import { FacebookLoginButton, GoogleLoginButton } from "react-social-login-buttons";
+import { GoogleLoginButton } from "react-social-login-buttons";
 import { BrowserRouter as Router, Link } from 'react-router-dom'
 
 export default class Login extends Component {
@@ -61,7 +61,6 @@ export default class Login extends Component {
             Forgot <Link to={'/forgot-password'}>password ?</Link>
           </p>
           <div className="d-grid">
-            <FacebookLoginButton onClick={() => alert("Facebook")} />
             <GoogleLoginButton onClick={() => alert("Google")} />
           </div>
           <hr/>

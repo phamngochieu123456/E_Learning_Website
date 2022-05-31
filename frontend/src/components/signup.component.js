@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Route, Link } from 'react-router-dom'
-import { FacebookLoginButton, GoogleLoginButton } from "react-social-login-buttons";
+import { GoogleLoginButton } from "react-social-login-buttons";
 
 export default class SignUp extends Component {
   render() {
@@ -45,9 +45,6 @@ export default class SignUp extends Component {
         </div>
         <hr></hr>
         <div className="d-grid">
-          <FacebookLoginButton onClick={() => alert("Facebook")} >
-          <span>Sign up with Facebook</span>
-          </FacebookLoginButton>
           <GoogleLoginButton onClick={() => alert("Facebook")} >
           <span>Sign up with Google</span>
           </GoogleLoginButton>
