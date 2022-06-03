@@ -10,23 +10,23 @@ export default class CardcourseIP extends Component {
                 <Container>
                     <Row>
                         <Col>
-                            <img style={{width:300}} src={"http://localhost:5000/" + this.props.data.img_path_class}></img>
+                            <Card.Img style={{width:250,height:250}} src={"http://localhost:5000/" + this.props.data.img_path_class}></Card.Img>
                         </Col>
-                            <Col>
-                                <Card.Body style={{marginTop:30}}>
-                                    <Card.Title>{this.props.data.name_class}</Card.Title>
-                                    <Card.Text>
-                                    {this.props.data.description_class}
-                                    </Card.Text>
-                                </Card.Body>
-                            </Col>
-                            <Col>
-                                <Card.Body style={{marginTop:30}}>
-                                    <Link className="btn btn-primary" to={'/learn/'+this.props.data.id_class}>
-                                        Go To Course
-                                    </Link>
-                                </Card.Body>
-                            </Col>
+                        <Col>
+                            <Card.Body style={{marginTop:30}}>
+                                <Card.Title>{this.props.data.name_class}</Card.Title>
+                                <Card.Text>
+                                {this.props.data.description_class}
+                                </Card.Text>
+                            </Card.Body>
+                        </Col>
+                        <Col>
+                            <Card.Body style={{marginTop:30}}>
+                                <Link className="btn btn-primary" to={'/learn/'+this.props.data.id_class}>
+                                    Go To Course
+                                </Link>
+                            </Card.Body>
+                        </Col>
                     </Row>
                 </Container>
             </Card>

@@ -15,21 +15,12 @@ export const CardCourseIPData = () =>
         }
         axios(config).then((res)=>{
             setClasses(res.data.data)
-            localStorage.setItem('class',JSON.stringify(res.data.data[0]))
         })
     },[])
 
-    var cols = [];
     var rows = [];
     classes.forEach(element => {
-        cols.push(<Col><CardcourseIP data={element}/></Col>);
+        rows.push(<Row key={element.id_class}><CardcourseIP data={element}/></Row>);
     });
-    for (var i = 0; i < cols.length; i++)
-    {
-        rows.push(<Row md={3}>{cols[i]}{cols[++i]}{cols[++i]}</Row>)
-        rows.map((cols)=>{
-            <Row key={i}>{cols}</Row>
-        })
-    }
     return <Container>{rows}</Container>;
 }

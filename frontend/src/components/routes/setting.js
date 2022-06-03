@@ -35,7 +35,6 @@ export default class Settings extends Component {
           console.log(JSON.stringify(res.data))
       }
       console.log(JSON.stringify(res))
-      // console.log(res)
     }
     catch(err)
     {

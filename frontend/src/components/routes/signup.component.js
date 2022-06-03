@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Route, Link } from 'react-router-dom'
-import { FacebookLoginButton, GoogleLoginButton } from "react-social-login-buttons";
 import axios from 'axios';
 
 export default class SignUp extends Component {

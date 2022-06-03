@@ -21,7 +21,6 @@ export const CardCourseData = () =>
     var cols = [];
     var rows = [];
     classes.forEach(element => {
-        console.log(JSON.stringify(element))
         cols.push(<Col><Cardcourse data={element}/></Col>);
     });
     for (var i = 0; i < cols.length; i++)

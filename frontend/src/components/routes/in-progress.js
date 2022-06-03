@@ -1,6 +1,5 @@
 import axios from 'axios'
 import React, { Component } from 'react'
-import { Container, Row } from 'react-bootstrap'
 import '../../assets/css/home.css'
 import CardcourseIP from '../Card/cardcourse.inprogress'
 import { CardCourseIPData } from '../functions/cardcourse.inprogress.data'

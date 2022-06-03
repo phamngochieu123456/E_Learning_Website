@@ -23,7 +23,6 @@ export default class NavbarLogged extends Component {
       if(res.data.success)
       {
           localStorage.setItem("user",JSON.stringify(res.data.data))
-          console.log("again" )
       }
     }
     catch(err)

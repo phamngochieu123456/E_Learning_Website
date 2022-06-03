@@ -39,7 +39,6 @@ export default class Account_profile extends Component {
           console.log(JSON.stringify(res.data))
       }
       console.log(JSON.stringify(res))
-      // console.log(res)
     }
     catch(err)
     {

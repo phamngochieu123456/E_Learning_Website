@@ -4,7 +4,6 @@ import '../../assets/css/home.css'
 import { GrDocumentPdf } from "react-icons/gr";
 import "../functions/subtopic"
 import { Subtopic } from '../functions/subtopic';
-import { Test } from '../functions/test';
 
 export default class LearnLecture extends Component {
     ratingChanged = (newRating) => {
