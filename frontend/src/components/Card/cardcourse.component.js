@@ -9,9 +9,9 @@ export default class Cardcourse extends Component {
             <Card>
             <Card.Img src='https://i.ytimg.com/vi/WUNWhIjUF2Y/hqdefault.jpg'></Card.Img>
             <Card.Body>
-                <Card.Title>{this.props.Title}</Card.Title>
+                <Card.Title>{this.props.data.name_class}</Card.Title>
                 <Card.Text>
-                Course description information.
+                {this.props.data.description_class}
                 </Card.Text>
                   <Link className="btn btn-primary" to={'/course-details'}>
                     Learn More
