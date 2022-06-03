@@ -9,8 +9,6 @@ router.post("/login",accountctrl.verifyAccount)
 router.get("/login/google",passport.authenticate("google",{scope: ["email", "profile"]}))
 router.get("/login/google/callback",passport.authenticate("google",{failureRedirect: 'http://localhost:3000/login', successRedirect: 'http://localhost:3000/dashboard'}))
 
-router.get("/home",accountctrl.getUserHome)
-
 router.post("/getuserbyaccountid",accountctrl.getUserByAccountId1)
 
 router.get("/logout",(req,res)=>{

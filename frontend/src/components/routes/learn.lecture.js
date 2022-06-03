@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Card, Row, Tab, Tabs } from 'react-bootstrap'
 import '../../assets/css/home.css'
-import ReactPlayer from 'react-player'
 import { GrDocumentPdf } from "react-icons/gr";
 
 export default class LearnLecture extends Component {
@@ -26,7 +25,6 @@ export default class LearnLecture extends Component {
                         </Card.Text>
                     </Tab>
                     <Tab eventKey="Video" title="Video">
-                        <ReactPlayer url='https://www.youtube.com/watch?v=ysz5S6PUM-U' />
                     </Tab>
                     <Tab eventKey="Resourse" title="Resourse">
                         <Card.Title>Frequently Asked Questions</Card.Title>
