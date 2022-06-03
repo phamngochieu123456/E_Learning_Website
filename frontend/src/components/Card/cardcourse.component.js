@@ -9,9 +9,9 @@ export default class Cardcourse extends Component {
             <Card>
             <Card.Img src='https://i.ytimg.com/vi/WUNWhIjUF2Y/hqdefault.jpg'></Card.Img>
             <Card.Body>
-                <Card.Title>Khóa học C++</Card.Title>
+                <Card.Title>{this.props.Title}</Card.Title>
                 <Card.Text>
-                Nắm được kiến thức cơ bản về C++
+                Course description information.
                 </Card.Text>
                   <Link className="btn btn-primary" to={'/course-details'}>
                     Learn More

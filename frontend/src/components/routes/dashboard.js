@@ -1,8 +1,7 @@
 import axios from 'axios'
 import React, { Component } from 'react'
-import { Col, Container, Row } from 'react-bootstrap'
 import '../../assets/css/home.css'
-import Cardcourse from '../cardcourse.component'
+import { CardCourseData } from '../functions/cardcourse.data'
 export default class Dashboard extends Component {
   componentDidMount()
   {
@@ -41,29 +40,7 @@ export default class Dashboard extends Component {
   render() {
     return (
         <div className='container-fluid'>
-          <Container>
-            <Row>
-              <Col><Cardcourse /></Col>
-              <Col><Cardcourse /></Col>
-              <Col><Cardcourse /></Col>
-            </Row>
-            <Row>
-              <Col><Cardcourse /></Col>
-              <Col><Cardcourse /></Col>
-              <Col><Cardcourse /></Col>
-            </Row>
-            <Row>
-              <Col><Cardcourse /></Col>
-              <Col><Cardcourse /></Col>
-              <Col><Cardcourse /></Col>
-            </Row>
-            <Row>
-              <Col><Cardcourse /></Col>
-              <Col><Cardcourse /></Col>
-              <Col><Cardcourse /></Col>
-            </Row>
-          </Container>
-
+            <CardCourseData />
         </div>
     )
   }
