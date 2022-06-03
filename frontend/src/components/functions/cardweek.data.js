@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { Nav } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 export const GetWeekByIdClass = () =>
 {
@@ -8,7 +9,7 @@ export const GetWeekByIdClass = () =>
 
     useEffect(()=>{
         const config = {
-            method: 'get',
+            method: 'post',
             url: 'http://localhost:5000/class/getWeekByIdClass',
             withCredentials: true,
             data: {id_class: id_class}
@@ -17,10 +18,9 @@ export const GetWeekByIdClass = () =>
             setWeeks(res.data.data)
         })
     },[])
-    console.log(weeks)
-    // var rows = [];
-    // classes.forEach(element => {
-    //     rows.push(<Row key={element.id_class}><CardcourseIP data={element}/></Row>);
-    // });
-    // return <Container>{rows}</Container>;
+    var rows = [];
+    weeks.forEach(element => {
+        rows.push(<Nav.Link key={element.id_week} href={window.location.href+'/week/'+element.id_week}>{element.name_week}</Nav.Link>);
+    });
+    return <>{rows}</>;
 }

@@ -1,69 +1,14 @@
-import axios from 'axios'
 import React, { Component } from 'react'
-import { Col, Nav, Row, Tab } from 'react-bootstrap'
+import { Row, Tab } from 'react-bootstrap'
 import '../../assets/css/home.css'
-import CardcourseW from '../Card/card.week'
-import LearnLecture from './learn.lecture'
+import { CardTopicData } from '../functions/cardtopic.data'
 export default class LearnWeek extends Component {
-  componentDidMount()
-  {
-
-    async function islogin()
-    {
-      try
-      {
-        const config = {
-          method: 'get',
-          url: 'http://localhost:5000/user/islogin',
-          withCredentials: true
-        }
-        const res = await axios(config)
-        if(res.data.success)
-        {
-          localStorage.setItem("account",JSON.stringify(res.data.data))
-          const islogin = localStorage.getItem("islogin")
-          if(!islogin)
-          {
-            localStorage.setItem("islogin",true)
-            window.location.reload()
-          }
-        }
-        else
-        {
-          console.log("Error: " + res.data.data)
-        }
-      }
-      catch(err)
-      {
-        console.log("Error: " + err)
-      }
-    }
-    islogin()
-  }
   render() {
     return (
         <div className='container-fluid'>
-          <Tab.Container id="left-tabs-example" defaultActiveKey="first">
+          <Tab.Container id="left-tabs-example">
             <Row>
-                <Col sm={3}>
-                <Nav variant="pills" className="flex-column bg-light">
-                    <CardcourseW />
-                    <CardcourseW />
-                </Nav>
-                </Col>
-                <Col sm={9}>
-                <Tab.Content>
-                    <Tab.Pane eventKey="first">
-                    <LearnLecture />
-                    </Tab.Pane>
-                    <Tab.Pane eventKey="second">
-                    <LearnLecture />
-                    </Tab.Pane>
-                    <Tab.Pane eventKey="third">
-                    <LearnLecture />
-                    </Tab.Pane>
-                </Tab.Content>
-                </Col>
+              <CardTopicData />
             </Row>
             </Tab.Container>
         </div>

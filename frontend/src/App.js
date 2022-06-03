@@ -41,7 +41,7 @@ function App() {
               <Route path="/in-progress" element={value==="false"?<Navigate to="/login" />:<InProgress />}/>
               <Route path="/learn/:id_class" element={value==="false"?<Navigate to="/login" />:<Learn />}/>
               <Route path="/completed" element={value==="false"?<Navigate to="/login" />:<Completed />}/>
-              <Route path="/learn/week" element={value==="false"?<Navigate to="/login" />:<LearnWeek />}/>
+              <Route path="/learn/:id_class/week/:id_week" element={value==="false"?<Navigate to="/login" />:<LearnWeek />}/>
               <Route path="*" element={<Errorpages />}/>
             </Routes>
         <footer>

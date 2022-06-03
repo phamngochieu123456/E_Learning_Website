@@ -54,14 +54,14 @@ classctrl.getSubTopicByIdTopic = (req,res)=>{
 }
 
 classctrl.getDocumentBySubTopicId = (req,res)=>{
-  classmd.getDocumentBySubTopicId((err,ducuments)=>{
+  classmd.getDocumentBySubTopicId((err,documents)=>{
     if(err)
     {
       res.json({success: false, data: err})
     }
     else
     {
-      res.json({success: true, data: ducuments})
+      res.json({success: true, data: documents})
     }
-  },req.body.id_topic)
+  },req.body.id_sub_topic)
 }
