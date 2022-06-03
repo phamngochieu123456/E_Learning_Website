@@ -1,5 +1,7 @@
 var accountctrl = module.exports
 const accountmd = require("../models/accountmd")
+const bcrypt = require("bcrypt")
+const uuid = require("uuid")
 
 accountctrl.getAllAccounts = (req,res)=>{
   accountmd.getAllAccounts((err,accounts)=>{
@@ -120,4 +122,42 @@ accountctrl.getUserHome = (req,res)=>{
     res.render("userhome",{title: "Home", User: {name_user: "Client"}})
     console.log("Error: " + err)
   }
+}
+
+accountctrl.insertAccountUser = (req,res)=>{
+
+  console.log("req.body: " + JSON.stringify(req.body))
+  res.end()
+
+  // const id_account = uuid.v4()
+  // const name_account = req.body.name_account
+  // const pass_account  = req.body.pass_account
+  // const pass_account_hash = bcrypt.hashSync(pass_account,5)
+  // const accountlist = [id_account,pass_account_hash,name_account]
+  // const phone_user = req.body.phone_user
+  // const birth_user = req.body.birth_user
+
+
+  // accountmd.insertAccount((err,results1)=>{
+  //   if(err)
+  //   {
+  //     console.log("Error: " + err)
+  //   }
+  //   else
+  //   {
+  //     accountmd.insertUser((err,results2)=>{
+  //       if(err)
+  //       {
+  //         console.log("Error: " + err)
+  //       }
+  //       else
+  //       {
+  //         res.json({success: true, data: results2})
+  //       }
+  //     })
+  //   }
+  // },accountlist)
+
+
+
 }

@@ -10,19 +10,19 @@ export default class CardcourseIP extends Component {
                 <Container>
                     <Row>
                         <Col>
-                            <img style={{width:300}} src='https://i.ytimg.com/vi/WUNWhIjUF2Y/hqdefault.jpg'></img>
+                            <img style={{width:300}} src={"http://localhost:5000/" + this.props.data.img_path_class}></img>
                         </Col>
                             <Col>
                                 <Card.Body style={{marginTop:30}}>
-                                    <Card.Title>Khóa học C++</Card.Title>
+                                    <Card.Title>{this.props.data.name_class}</Card.Title>
                                     <Card.Text>
-                                    Nắm được kiến thức cơ bản về C++
+                                    {this.props.data.description_class}
                                     </Card.Text>
                                 </Card.Body>
                             </Col>
                             <Col>
                                 <Card.Body style={{marginTop:30}}>
-                                    <Link className="btn btn-primary" to={'/learn'}>
+                                    <Link className="btn btn-primary" to={'/learn/'+this.props.data.id_class}>
                                         Go To Course
                                     </Link>
                                 </Card.Body>

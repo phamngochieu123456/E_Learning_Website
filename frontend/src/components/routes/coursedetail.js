@@ -9,6 +9,10 @@ export default class CourseDetail extends Component {
     ratingChanged = (newRating) => {
         console.log(newRating);
       };
+    componentDidMount()
+    {
+        // {this.props.match.params.id}
+    }
   render() {
     return (
         <>

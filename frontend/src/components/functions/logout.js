@@ -27,29 +27,6 @@ export const Logout = () =>{
             console.log("Error: " + err)
         }
     }
-    // const handleClick = async () =>
-    // {
-    //     try
-    //     {
-    //     const payload = this.state;
-    //     const headers = {
-    //         authorization: ' JWT fefege...' ,
-    //         'Content-Type': 'application/json'
-    //     }
-    //     const res = await axios.put("http://localhost:5000/user/logout",payload,{headers})
-
-    //     localStorage.setItem("state",false)
-    //     localStorage.removeItem("username")
-    //     navigate("/login")
-    //     window.location.reload(); //like here
-
-    //     }
-    //     catch(err)
-    //     {
-    //     console.log("Error: " + err)
-    //     }    
-
-    // }
     return(
         <NavDropdown.Item onClick={handleClick}>Logout</NavDropdown.Item>
 

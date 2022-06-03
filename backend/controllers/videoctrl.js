@@ -1,4 +1,5 @@
-module.exports = videoctrl
+var videoctrl = module.exports
+
 
 const fs = require("fs")
 const classmd = require("../models/classmd")

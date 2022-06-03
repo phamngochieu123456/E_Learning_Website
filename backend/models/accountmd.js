@@ -149,3 +149,29 @@ accountmd.getnewtoken = async (result,refreshtoken) => {
     result(err,null)
   }
 }
+
+accountmd.insertAccount = async (result,accountlist) =>{
+  try
+  {
+    var sql = "INSERT INTO account (id_account, pass_account, name_account) VALUES ?"
+    const results = await query(sql,[accountlist])
+    result(null,results)
+  }
+  catch(err)
+  {
+    result(err,null)
+  }
+}
+
+accountmd.insertUser = async (result,userlist) =>{
+  try
+  {
+    var sql = "INSERT INTO user (id_account, phone_user, birth_user, sex_user, id_type_user, name_user, id_user) VALUES ?"
+    const results = await query(sql,[userlist])
+    result(null,results)
+  }
+  catch(err)
+  {
+    result(err,null)
+  }
+}

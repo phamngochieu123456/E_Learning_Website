@@ -28,4 +28,6 @@ router.route("/islogin")
     }
   })
 
+router.post("/signin",accountctrl.insertAccountUser)
+
 module.exports = router

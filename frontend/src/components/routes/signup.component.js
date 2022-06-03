@@ -13,6 +13,7 @@ export default class SignUp extends Component {
       phoneNumber: "",
       Birth: "",
       Gender: "",
+      Role: "",
       SignUpError: "",
   }
   this.handleSubmit = this.handleSubmit.bind(this);
@@ -26,25 +27,21 @@ handleChange = (event) => {
 handleSubmit = async (event) => {
   try
   {
-    event.preventDefault();
-    const payload = this.state;
-    const headers = {
-      authorization: ' JWT fefege...' ,
-      'Content-Type': 'application/json'
+    const config = {
+      method: 'post',
+      url: 'http://localhost:5000/user/signin',
+      withCredentials: true,
+      data: this.state
     }
-    const res = await axios.post("http://localhost:5000/user/login",payload,{headers})
-
-    if(res.data.success)
-    {
-        console.log(JSON.stringify(res.data))
-        window.location.reload(); 
-    }
-    else
-    {
-        this.state.SignUpError = res.data.data
-        alert(this.state.SignUpError)
-    }
-    console.log(JSON.stringify(res))
+    const res = await axios(config)
+    // if(res.data.success)
+    // {
+    //   console.log("data: " + JSON.stringify(res.data.data))
+    // }
+    // else
+    // {
+    //   console.log("Error: " + res.data.data)
+    // }
   }
   catch(err)
   {
@@ -134,17 +131,38 @@ handleSubmit = async (event) => {
                 </label>
             </div>
           </div>
+          <div className="mb-3">
+            <div className="radio">
+            <label>
+              <input
+                type="radio"
+                name='role'
+                value="Teacher"
+                defaultChecked={this.state.Role === "Teacher"}
+                onChange={this.handleChange}
+              />
+              Teacher
+            </label>
+            </div>
+            <div className="radio">
+                <label>
+                  <input
+                    type="radio"
+                    name='role'
+                    value="Student"
+                    defaultChecked={this.state.Role === "Student"}
+                    onChange={this.handleChange}
+                  />
+                  Student
+                </label>
+            </div>
+          </div>
         <div className="d-grid">
-          <button type="submit" className="btn btn-primary">
+          <button type="submit" className="btn btn-primary" onClick={this.handleSubmit}>
             Sign Up
           </button>
         </div>
         <hr></hr>
-        <div className="d-grid">
-          <GoogleLoginButton onClick={() => alert("Facebook")} >
-          <span>Sign up with Google</span>
-          </GoogleLoginButton>
-        </div>
         <p className="forgot-password text-right">
           Already registered <Link to={'/login'}>Sign in ?</Link>
         </p>

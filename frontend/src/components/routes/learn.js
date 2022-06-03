@@ -6,26 +6,22 @@ import '../../assets/css/home.css'
 export default class Learn extends Component {
   componentDidMount()
   {
-
-    async function islogin()
+    async function getWeekByIdClass()
     {
+      const class1 = localStorage.getItem("class");
+      const classjson1 = JSON.parse(class1)
       try
       {
         const config = {
-          method: 'get',
-          url: 'http://localhost:5000/user/islogin',
-          withCredentials: true
+          method: 'post',
+          url: 'http://localhost:5000/class/getWeekByIdClass',
+          withCredentials: true,
+          data: {id_class: classjson1.id_class}
         }
         const res = await axios(config)
         if(res.data.success)
         {
-          localStorage.setItem("account",JSON.stringify(res.data.data))
-          const islogin = localStorage.getItem("islogin")
-          if(!islogin)
-          {
-            localStorage.setItem("islogin",true)
-            window.location.reload()
-          }
+          console.log("data: " + JSON.stringify(res.data.data))
         }
         else
         {
@@ -37,7 +33,7 @@ export default class Learn extends Component {
         console.log("Error: " + err)
       }
     }
-    islogin()
+    getWeekByIdClass()
   }
   render() {
     return (

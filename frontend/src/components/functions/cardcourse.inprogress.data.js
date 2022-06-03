@@ -1,9 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import Cardcourse from "../Card/cardcourse.component";
+import CardcourseIP from "../Card/cardcourse.inprogress";
 
-export const CardCourseData = () =>
+export const CardCourseIPData = () =>
 {
     const [classes,setClasses] = useState([])
 
@@ -15,14 +15,14 @@ export const CardCourseData = () =>
         }
         axios(config).then((res)=>{
             setClasses(res.data.data)
+            localStorage.setItem('class',JSON.stringify(res.data.data[0]))
         })
     },[])
 
     var cols = [];
     var rows = [];
     classes.forEach(element => {
-        console.log(JSON.stringify(element))
-        cols.push(<Col><Cardcourse data={element}/></Col>);
+        cols.push(<Col><CardcourseIP data={element}/></Col>);
     });
     for (var i = 0; i < cols.length; i++)
     {
@@ -32,5 +32,4 @@ export const CardCourseData = () =>
         })
     }
     return <Container>{rows}</Container>;
-
 }

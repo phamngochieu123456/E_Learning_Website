@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import { Container, Row } from 'react-bootstrap'
 import '../../assets/css/home.css'
 import CardcourseIP from '../Card/cardcourse.inprogress'
+import { CardCourseIPData } from '../functions/cardcourse.inprogress.data'
 export default class InProgress extends Component {
   componentDidMount()
   {
@@ -42,11 +43,7 @@ export default class InProgress extends Component {
   render() {
     return (
         <div className='container-fluid'>
-          <Container>
-              <Row><CardcourseIP /></Row>
-              <Row><CardcourseIP /></Row>
-              <Row><CardcourseIP /></Row>
-          </Container>
+          <CardCourseIPData />
 
         </div>
     )

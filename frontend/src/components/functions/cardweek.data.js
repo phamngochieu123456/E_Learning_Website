@@ -3,25 +3,27 @@ import { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import Cardcourse from "../Card/cardcourse.component";
 
-export const CardCourseData = () =>
+export const CardWeekData = () =>
 {
-    const [classes,setClasses] = useState([])
-
+    const [weeks,setWeeks] = useState([])
+    const class1 = localStorage.getItem("class");
+    const classjson1 = JSON.parse(class1)
     useEffect(()=>{
         const config = {
             method: 'get',
             url: 'http://localhost:5000/class/getallclass',
-            withCredentials: true
+            withCredentials: true,
+            data: {id_class: classjson1.id_class}
+
         }
         axios(config).then((res)=>{
-            setClasses(res.data.data)
+          setWeeks(res.data.data)
         })
     },[])
 
     var cols = [];
     var rows = [];
-    classes.forEach(element => {
-        console.log(JSON.stringify(element))
+    weeks.forEach(element => {
         cols.push(<Col><Cardcourse data={element}/></Col>);
     });
     for (var i = 0; i < cols.length; i++)

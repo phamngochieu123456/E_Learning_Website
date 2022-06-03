@@ -1,4 +1,4 @@
-module.exports = pdfctrl
+var pdfctrl = module.exports
 
 const fs = require("fs")
 const classmd = require("../models/classmd")

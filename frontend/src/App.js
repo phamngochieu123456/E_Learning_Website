@@ -39,7 +39,7 @@ function App() {
               <Route path="/account-profile" element={value==="false"?<Navigate to="/login" />:<div className="auth-wrapper"><Account_profile /></div>}/>
               <Route path="/settings" element={value==="false"?<Navigate to="/login" />:<div className="auth-wrapper"><Settings /></div>}/>
               <Route path="/in-progress" element={value==="false"?<Navigate to="/login" />:<InProgress />}/>
-              <Route path="/learn" element={value==="false"?<Navigate to="/login" />:<Learn />}/>
+              <Route path="/learn/:id_class" element={value==="false"?<Navigate to="/login" />:<Learn />}/>
               <Route path="/completed" element={value==="false"?<Navigate to="/login" />:<Completed />}/>
               <Route path="/learn/week" element={value==="false"?<Navigate to="/login" />:<LearnWeek />}/>
               <Route path="*" element={<Errorpages />}/>
