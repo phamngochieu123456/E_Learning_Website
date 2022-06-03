@@ -14,7 +14,6 @@ export default class SignUp extends Component {
       Birth: "",
       Gender: "",
       Role: "",
-      SignUpError: "",
   }
   this.handleSubmit = this.handleSubmit.bind(this);
 }
@@ -65,7 +64,7 @@ handleSubmit = async (event) => {
           </div>
         <div className="mb-3">
             <input
-              type="text"
+              type="password"
               name='password'
               className="form-control"
               placeholder='Enter password'
@@ -99,31 +98,34 @@ handleSubmit = async (event) => {
           <div className="mb-3">
             <input
               type="date"
-              name='birth'
+              name='Birth'
               className="form-control"
               onChange={this.handleChange}
               required
             />
           </div>
-          <div className="mb-3">
-            <div className="radio">
+          <div className="mb-3 row">
+            <div className='col'>
+              Gender
+            </div>
+            <div className="radio col">
             <label>
               <input
                 type="radio"
-                name='gender'
-                value="Male"
+                name='Gender'
+                value="1"
                 defaultChecked={this.state.Gender === "Male"}
                 onChange={this.handleChange}
               />
               Male
             </label>
             </div>
-            <div className="radio">
+            <div className="radio col">
                 <label>
                   <input
                     type="radio"
-                    name='gender'
-                    value="Female"
+                    name='Gender'
+                    value="0"
                     defaultChecked={this.state.Gender === "Female"}
                     onChange={this.handleChange}
                   />
@@ -131,26 +133,29 @@ handleSubmit = async (event) => {
                 </label>
             </div>
           </div>
-          <div className="mb-3">
-            <div className="radio">
+          <div className="mb-3 row">
+            <div className='col'>
+              Role
+            </div>
+            <div className="radio col">
             <label>
               <input
                 type="radio"
-                name='role'
-                value="Teacher"
-                defaultChecked={this.state.Role === "Teacher"}
+                name='Role'
+                value="TEACHER"
+                defaultChecked={this.state.Role === "TEACHER"}
                 onChange={this.handleChange}
               />
               Teacher
             </label>
             </div>
-            <div className="radio">
+            <div className="radio col">
                 <label>
                   <input
                     type="radio"
-                    name='role'
-                    value="Student"
-                    defaultChecked={this.state.Role === "Student"}
+                    name='Role'
+                    value="STUDENT"
+                    defaultChecked={this.state.Role === "STUDENT"}
                     onChange={this.handleChange}
                   />
                   Student
