@@ -2,7 +2,7 @@ var classctrl = module.exports
 const classmd = require("../models/classmd")
 
 classctrl.getAllClass = (req,res)=>{
-  classctrl.getAllClass((err,classes)=>{
+  classmd.getAllClass((err,classes)=>{
     if(err)
     {
       res.json({success: false, data: err})
