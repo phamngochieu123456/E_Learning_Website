@@ -11,6 +11,7 @@ const authroute = require("./routes/authroute")
 const videoroute = require("./routes/videoroute")
 const classroute = require("./routes/classroute")
 const pdfroute = require("./routes/pdfroute")
+const paymentroute = require("./routes/paymentroute")
 
 const app = express()
 
@@ -41,6 +42,7 @@ app.use("/auth",authroute)
 app.use("/video",videoroute)
 app.use("/class",classroute)
 app.use("/pdf",pdfroute)
+app.use("/payment",paymentroute)
 
 app.listen(process.env.PORT,()=>{
   console.log(`Server is running on port ${process.env.PORT}`)

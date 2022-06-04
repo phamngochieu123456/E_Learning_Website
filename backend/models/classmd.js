@@ -15,6 +15,18 @@ classmd.getAllClass = async (result) =>{
   }
 }
 
+classmd.getClassById = async (result,id_class) =>{
+  try
+  {
+    var results = await query("select * from class where id_class = \"" + id_class + "\"")
+    result(null,results[0])
+  }
+  catch(err)
+  {
+    result(err,null)
+  }
+}
+
 classmd.getWeekByIdClass = async (result,id_class) =>{
   try
   {
