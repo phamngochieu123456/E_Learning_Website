@@ -78,7 +78,7 @@ classmd.getDocumentById = async (result,id_document) =>{
 classmd.isExistUserWithClass = async (result, id_user, id_class) =>{
   try
   {
-    const results = await query("select * from list_classes where id_use = \"" + id_user +"\"" + "and id_class = \"" + id_class +"\"")
+    const results = await query("select * from list_classes where id_user = \"" + id_user +"\"" + "and id_class = \"" + id_class +"\"")
     result(null,results[0])
   }
   catch(err)

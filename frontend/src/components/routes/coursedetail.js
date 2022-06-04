@@ -3,19 +3,17 @@ import { Card, Col, Container, Row, Tab, Tabs } from 'react-bootstrap'
 import '../../assets/css/home.css'
 import ReactStars from "react-rating-stars-component";
 import FAQ from '../Collapse/faq';
+import { GetCourseDetailByIdClass } from '../functions/coursedetails.data';
 
 export default class CourseDetail extends Component {
     ratingChanged = (newRating) => {
         console.log(newRating);
       };
-    componentDidMount()
-    {
-        // {this.props.match.params.id}
-    }
   render() {
     return (
         <>
-            <Container className='bg-dark container-fluid p-3'>
+        <GetCourseDetailByIdClass />
+            <Container className='bg-dark container-fluid'>
             <Row xs="auto" md={3}>
             <Col>
                 <Card className='bg-transparent'>
@@ -49,7 +47,6 @@ export default class CourseDetail extends Component {
             </Container>
             <Row>
                 <Card>
-                <Card.Header className='d-flex'>-Course link-</Card.Header>
                 <Card.Body>
                     <Tabs defaultActiveKey="Overview" id="uncontrolled-tab-example" className="mb-3">
                     <Tab eventKey="Overview" title="Overview">
