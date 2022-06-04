@@ -1,9 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Container, Row } from "react-bootstrap";
-import CardcourseIP from "../Card/cardcourse.inprogress";
+import CardcourseC from "../Card/card.complete";
 
-export const CardCourseIPData = () =>
+export const CardCourseCData = () =>
 {
     const [classes,setClasses] = useState([])
 
@@ -20,7 +20,7 @@ export const CardCourseIPData = () =>
 
     var rows = [];
     classes.forEach(element => {
-        rows.push(<Row key={element.id_class}><CardcourseIP data={element}/></Row>);
+        rows.push(<Row key={element.id_class}><CardcourseC data={element}/></Row>);
     });
     return <Container>{rows}</Container>;
 }
