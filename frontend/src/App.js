@@ -20,6 +20,8 @@ import InProgress from './components/routes/in-progress';
 import Learn from './components/routes/learn';
 import Completed from './components/routes/complete';
 import LearnWeek from './components/routes/learn.week';
+import PaymentSuccess from './components/routes/payment.success';
+import PaymentCancel from './components/routes/payment.cancel';
 
 function App() {
   const value = localStorage.getItem('state')
@@ -41,6 +43,8 @@ function App() {
               <Route path="/in-progress" element={value==="false"?<Navigate to="/login" />:<InProgress />}/>
               <Route path="/learn/:id_class" element={value==="false"?<Navigate to="/login" />:<Learn />}/>
               <Route path="/completed" element={value==="false"?<Navigate to="/login" />:<Completed />}/>
+              <Route path="/payment-success" element={value==="false"?<Navigate to="/login" />:<PaymentSuccess />}/>
+              <Route path="/payment-cancel" element={value==="false"?<Navigate to="/login" />:<PaymentCancel />}/>
               <Route path="/learn/:id_class/week/:id_week" element={value==="false"?<Navigate to="/login" />:<LearnWeek />}/>
               <Route path="*" element={<Errorpages />}/>
             </Routes>
