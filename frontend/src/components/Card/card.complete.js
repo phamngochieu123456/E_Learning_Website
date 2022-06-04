@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Card, Col, Container, Row } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
 
 export default class CardcourseC extends Component {
   render() {
@@ -10,13 +9,13 @@ export default class CardcourseC extends Component {
                 <Container>
                     <Row>
                         <Col>
-                            <img style={{width:300}} src='https://i.ytimg.com/vi/WUNWhIjUF2Y/hqdefault.jpg'></img>
+                        <Card.Img style={{width:250,height:250}} src={"http://localhost:5000/" + this.props.data.img_path_class}></Card.Img>
                         </Col>
                             <Col>
                                 <Card.Body style={{marginTop:30}}>
-                                    <Card.Title>Khóa học C++</Card.Title>
+                                    <Card.Title>{this.props.data.name_class}</Card.Title>
                                     <Card.Text>
-                                    Nắm được kiến thức cơ bản về C++
+                                    {this.props.data.description_class}
                                     </Card.Text>
                                 </Card.Body>
                             </Col>

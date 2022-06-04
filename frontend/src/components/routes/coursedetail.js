@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Card, Col, Container, Row, Tab, Tabs } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
 import '../../assets/css/home.css'
 import ReactStars from "react-rating-stars-component";
 import FAQ from '../Collapse/faq';
