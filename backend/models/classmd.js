@@ -86,3 +86,29 @@ classmd.isExistUserWithClass = async (result, id_user, id_class) =>{
     result(err,null)
   }
 }
+
+classmd.insertLissClasses = async (result, listclasseslist) =>{
+  try
+  {
+    var sql = "INSERT INTO list_classes (id_user, id_class, id_type_user, time_class) VALUES ?"
+    const results = await query(sql,[listclasseslist])
+    result(null,results)
+  }
+  catch(err)
+  {
+    result(err,null)
+  }
+}
+
+classmd.getIdTypeUserByName = async (result,name_type_user) =>{
+  try
+  {
+    var results = await query("select * from type_user where name_type_user = \"" + name_type_user + "\"")
+    result(null,results)
+  }
+  catch(err)
+  {
+    result(err,null)
+  }
+}
+

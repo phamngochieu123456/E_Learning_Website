@@ -1,5 +1,6 @@
 var classctrl = module.exports
 const classmd = require("../models/classmd")
+const moment = require("moment")
 
 classctrl.getAllClass = (req,res)=>{
   classmd.getAllClass((err,classes)=>{
@@ -77,4 +78,37 @@ classctrl.isExistUserWithClass = (req,res)=>{
       res.json({success: true, data: results})
     }
   },req.body.id_user, req.body.id_class)
+}
+
+classctrl.insertLissClasses = (req,res)=>{
+
+  const id_user = req.body.id_user
+  const id_class = req.body.id_class
+  const id_type_user = req.body.id_type_user
+  const time_class = moment().format("YYYY-MM-DD HH:mm:ss")
+  const listclasseslist = [[id_user,id_class,id_type_user,time_class]]
+
+  classmd.insertLissClasses((err,results)=>{
+    if(err)
+    {
+      res.json({success: false, data: err})
+    }
+    else
+    {
+      res.json({success: true, data: results})
+    }
+  },listclasseslist)
+}
+
+classctrl.getIdTypeUserByName = (req,res)=>{
+  classmd.getIdTypeUserByName((err,id_type_user)=>{
+    if(err)
+    {
+      res.json({success: false, data: err})
+    }
+    else
+    {
+      res.json({success: true, data: id_type_user})
+    }
+  },req.body.name_type_user)
 }

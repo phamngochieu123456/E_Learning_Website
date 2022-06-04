@@ -9,5 +9,7 @@ router.post("/getTopicByIdWeek",classctrl.getTopicByIdWeek)
 router.post("/getSubTopicByIdTopic",classctrl.getSubTopicByIdTopic)
 router.post("/getDocumentBySubTopicId",classctrl.getDocumentBySubTopicId)
 router.post("/isExistUserWithClass",classctrl.isExistUserWithClass)
+router.post("/getIdTypeUserByName",classctrl.getIdTypeUserByName)
+router.post("/insertLissClasses",classctrl.insertLissClasses)
 
 module.exports = router
