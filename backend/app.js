@@ -16,13 +16,13 @@ const app = express()
 
 app.use(cors({ origin: "http://localhost:3000", credentials: true }))
 
-app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", req.headers.origin);
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, X-IP, Content-Type, Accept");
-  res.header("Access-Control-Allow-Credentials", true)
-  res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
-  next();
-});
+// app.use(function (req, res, next) {
+//   res.header("Access-Control-Allow-Origin", req.headers.origin);
+//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, X-IP, Content-Type, Accept");
+//   res.header("Access-Control-Allow-Credentials", true)
+//   res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
+//   next();
+// });
 
 app.set('view engine', 'ejs');
 app.use(express.static("./public"))
