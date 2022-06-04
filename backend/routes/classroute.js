@@ -8,5 +8,6 @@ router.post("/getWeekByIdClass",classctrl.getWeekByIdClass)
 router.post("/getTopicByIdWeek",classctrl.getTopicByIdWeek)
 router.post("/getSubTopicByIdTopic",classctrl.getSubTopicByIdTopic)
 router.post("/getDocumentBySubTopicId",classctrl.getDocumentBySubTopicId)
+router.post("/isExistUserWithClass",classctrl.isExistUserWithClass)
 
 module.exports = router

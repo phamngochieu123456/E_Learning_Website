@@ -65,3 +65,16 @@ classctrl.getDocumentBySubTopicId = (req,res)=>{
     }
   },req.body.id_sub_topic)
 }
+
+classctrl.isExistUserWithClass = (req,res)=>{
+  classmd.isExistUserWithClass((err,results)=>{
+    if(err)
+    {
+      res.json({success: false, data: err})
+    }
+    else
+    {
+      res.json({success: true, data: results})
+    }
+  },req.body.id_user, req.body.id_class)
+}
