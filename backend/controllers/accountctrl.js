@@ -75,6 +75,7 @@ accountctrl.getUserByAccountId = (req,res)=>{
     res.json({success: false, data: "Khong co req.user"})
   }
 }
+
 accountctrl.getUserByAccountId1=(req,res)=>{
   if(req.body)
   {
@@ -94,6 +95,7 @@ accountctrl.getUserByAccountId1=(req,res)=>{
     res.json({success:false,data:"Khong co req.body"})
   }
 }
+
 accountctrl.getUserHome = (req,res)=>{
   try
   {
@@ -127,37 +129,32 @@ accountctrl.getUserHome = (req,res)=>{
 accountctrl.insertAccountUser = (req,res)=>{
 
   console.log("req.body: " + JSON.stringify(req.body))
-  res.end()
 
-  // const id_account = uuid.v4()
-  // const name_account = req.body.name_account
-  // const pass_account  = req.body.pass_account
-  // const pass_account_hash = bcrypt.hashSync(pass_account,5)
-  // const accountlist = [id_account,pass_account_hash,name_account]
-  // const phone_user = req.body.phone_user
-  // const birth_user = req.body.birth_user
+  const id_account = uuid.v4()
+  const name_account = req.body.email
+  const pass_account  = req.body.pass_account
+  const pass_account_hash = bcrypt.hashSync(pass_account,5)
 
+  const accountlist = [[id_account, pass_account_hash, name_account]]
 
-  // accountmd.insertAccount((err,results1)=>{
-  //   if(err)
-  //   {
-  //     console.log("Error: " + err)
-  //   }
-  //   else
-  //   {
-  //     accountmd.insertUser((err,results2)=>{
-  //       if(err)
-  //       {
-  //         console.log("Error: " + err)
-  //       }
-  //       else
-  //       {
-  //         res.json({success: true, data: results2})
-  //       }
-  //     })
-  //   }
-  // },accountlist)
+  const phone_user = req.body.phone_user
+  const birth_user = req.body.birth_user
+  const sex_user = req.body.sex_user
+  const name_type_user = req.body.Role
+  const name_user = req.body.name_user
+  const id_user = uuid.v4()
 
+  const userlist = [[id_account, phone_user, birth_user, sex_user, name_type_user, name_user, id_user]]
 
+  accountmd.insertAccountUser((err,results)=>{
+    if(err)
+    {
+      console.log("Error1: " + err)
+    }
+    else
+    {
+      res.json({success: true, data: results}) 
+    } 
+  },accountlist,userlist)
 
 }

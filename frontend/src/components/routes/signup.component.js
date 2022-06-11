@@ -7,11 +7,11 @@ export default class SignUp extends Component {
     super(props);
     this.state={
       email: "",
-      password: "",
-      username: "",
-      phoneNumber: "",
-      Birth: "",
-      Gender: "",
+      pass_account: "",
+      name_user: "",
+      phone_user: "",
+      birth_user: "",
+      sex_user: "",
       Role: "",
   }
   this.handleSubmit = this.handleSubmit.bind(this);
@@ -64,10 +64,10 @@ handleSubmit = async (event) => {
         <div className="mb-3">
             <input
               type="password"
-              name='password'
+              name='pass_account'
               className="form-control"
               placeholder='Enter password'
-              value={this.state.password}
+              value={this.state.pass_account}
               onChange={this.handleChange}
               required
             />
@@ -75,10 +75,10 @@ handleSubmit = async (event) => {
         <div className="mb-3">
             <input
               type="text"
-              name='username'
+              name='name_user'
               className="form-control"
               placeholder='Enter username'
-              value={this.state.username}
+              value={this.state.name_user}
               onChange={this.handleChange}
               required
             />
@@ -86,10 +86,10 @@ handleSubmit = async (event) => {
           <div className="mb-3">
             <input
               type="tel"
-              name='phoneNumber'
+              name='phone_user'
               className="form-control"
               placeholder="Enter Phone Number"
-              value={this.state.phoneNumber}
+              value={this.state.phone_user}
               onChange={this.handleChange}
               required
             />
@@ -97,7 +97,7 @@ handleSubmit = async (event) => {
           <div className="mb-3">
             <input
               type="date"
-              name='Birth'
+              name='birth_user'
               className="form-control"
               onChange={this.handleChange}
               required
@@ -105,15 +105,15 @@ handleSubmit = async (event) => {
           </div>
           <div className="mb-3 row">
             <div className='col'>
-              Gender
+              sex_user
             </div>
             <div className="radio col">
             <label>
               <input
                 type="radio"
-                name='Gender'
+                name='sex_user'
                 value="1"
-                defaultChecked={this.state.Gender === "Male"}
+                defaultChecked={this.state.sex_user === "Male"}
                 onChange={this.handleChange}
               />
               Male
@@ -123,9 +123,9 @@ handleSubmit = async (event) => {
                 <label>
                   <input
                     type="radio"
-                    name='Gender'
+                    name='sex_user'
                     value="0"
-                    defaultChecked={this.state.Gender === "Female"}
+                    defaultChecked={this.state.sex_user === "Female"}
                     onChange={this.handleChange}
                   />
                   Female
@@ -167,7 +167,7 @@ handleSubmit = async (event) => {
           </button>
         </div>
         <hr></hr>
-        <p className="forgot-password text-right">
+        <p className="forgot-pass_account text-right">
           Already registered <Link to={'/login'}>Sign in ?</Link>
         </p>
       </div>

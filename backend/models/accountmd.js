@@ -150,12 +150,20 @@ accountmd.getnewtoken = async (result,refreshtoken) => {
   }
 }
 
-accountmd.insertAccount = async (result,accountlist) =>{
+accountmd.insertAccountUser = async (result,accountlist, userlist) => {
   try
   {
     var sql = "INSERT INTO account (id_account, pass_account, name_account) VALUES ?"
-    const results = await query(sql,[accountlist])
-    result(null,results)
+    await query(sql,[accountlist])
+
+    var sql1 = "select * from type_user where name_type_user = \"" + userlist[0][4] +"\""
+    const type_users = await query(sql1)
+
+    const type_user = type_users[0]
+    var sql2 = "INSERT INTO user (id_account, phone_user, birth_user, sex_user, id_type_user, name_user, id_user) VALUES ?"
+    userlist[0].splice(4,1,type_user.id_type_user)
+    const results = await query(sql2,[userlist])
+    result(null,"Insert Success!!!")
   }
   catch(err)
   {
@@ -163,15 +171,28 @@ accountmd.insertAccount = async (result,accountlist) =>{
   }
 }
 
-accountmd.insertUser = async (result,userlist) =>{
-  try
-  {
-    var sql = "INSERT INTO user (id_account, phone_user, birth_user, sex_user, id_type_user, name_user, id_user) VALUES ?"
-    const results = await query(sql,[userlist])
-    result(null,results)
-  }
-  catch(err)
-  {
-    result(err,null)
-  }
-}
+// accountmd.getIdTypeUserByNTU = async(result,Id) =>{
+//   try
+//   {
+//     var type_users = await query("select * from type_user where id_type_user = \"" + Id+"\"")
+//     result(null,type_users)
+//   }
+//   catch(err)
+//   {
+//     console.log("Error: " + err)
+//     result(err,null)
+//   }
+// }
+
+// accountmd.insertUser = async (result,userlist) =>{
+//   try
+//   {
+//     var sql = "INSERT INTO user (id_account, phone_user, birth_user, sex_user, id_type_user, name_user, id_user) VALUES ?"
+//     const results = await query(sql,[userlist])
+//     result(null,results)
+//   }
+//   catch(err)
+//   {
+//     result(err,null)
+//   }
+// }
