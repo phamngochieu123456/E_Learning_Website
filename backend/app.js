@@ -15,18 +15,36 @@ const pdfroute = require("./routes/pdfroute")
 
 const app = express()
 
-var whitelist = ['http://localhost:3000', 'http://localhost:8000']
-var corsOptions = {
-  origin: function (origin, callback) {
-    if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true)
-    } else {
-      callback(new Error('Not allowed by CORS'))
-    }
-  },
-  credentials: true
-}
-app.use(cors(corsOptions))
+// var whitelist = ['http://localhost:3000', 'http://localhost:8000']
+// var corsOptions = {
+//   origin: function (origin, callback) {
+//     if (whitelist.indexOf(origin) !== -1) {
+//       callback(null, true)
+//     } else {
+//       callback(new Error('Not allowed by CORS'))
+//     }
+//   },
+//   credentials: true
+// }
+
+// var corsOptions = {
+//   origin: "*",
+//   credentials: true
+// }
+
+app.use((req, res, next) => {
+  const allowedOrigins = ['http://localhost:3000', 'http://localhost:8000'];
+  const origin = req.headers.origin;
+  if (allowedOrigins.includes(origin)) {
+       res.setHeader('Access-Control-Allow-Origin', origin);
+  }
+  res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.header('Access-Control-Allow-Credentials', true);
+  next()
+})
+
+// app.use(cors(corsOptions))
 
 app.set('view engine', 'ejs');
 app.use(express.static("./public"))
