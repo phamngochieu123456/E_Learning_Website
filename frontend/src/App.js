@@ -22,6 +22,7 @@ import Completed from './components/routes/complete';
 import LearnWeek from './components/routes/learn.week';
 import PaymentSuccess from './components/routes/payment.success';
 import PaymentCancel from './components/routes/payment.cancel';
+import About from './components/routes/about';
 
 function App() {
   const value = localStorage.getItem('state')
@@ -37,6 +38,8 @@ function App() {
               <Route path="/sign-up" element={value==="true"?<Navigate to="/dashboard" />:<div className="auth-wrapper"><SignUp /></div>}/>
               <Route path="/forgot-password" element={value==="true"?<Navigate to="/dashboard" />:<div className="auth-wrapper"><ForgotPassword /></div>}/>
               <Route path="/dashboard" element={<Dashboard />}/>
+              <Route path="/courses" element={<Dashboard />}/>
+              <Route path="/about" element={<About />}/>
               <Route path="/course-details/:id_class" element={value==="false"?<Navigate to="/login" />:<CourseDetail />}/>
               <Route path="/account-profile" element={value==="false"?<Navigate to="/login" />:<div className="auth-wrapper"><Account_profile /></div>}/>
               <Route path="/settings" element={value==="false"?<Navigate to="/login" />:<div className="auth-wrapper"><Settings /></div>}/>

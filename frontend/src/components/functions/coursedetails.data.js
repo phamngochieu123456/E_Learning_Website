@@ -1,13 +1,18 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Nav } from 'react-bootstrap';
-import { useParams } from 'react-router-dom';
+import { Card, Col } from 'react-bootstrap';
+import { Link, useParams } from 'react-router-dom';
 export const GetCourseDetailByIdClass = () =>
 {
     const { id_class } = useParams();
     const user = localStorage.getItem("user");
-    const accountjson = JSON.parse(user)
-    const id_user = accountjson.id_user
+    let id_user = ""
+    if(user!=null)
+    {
+        const accountjson = JSON.parse(user)
+        id_user = accountjson.id_user
+    }
+
     const [details,setDetails] = useState([])
 
     useEffect(()=>{
@@ -21,10 +26,47 @@ export const GetCourseDetailByIdClass = () =>
             setDetails(res.data.success)
         })
     },[])
-    console.log(details)
-    // var rows = [];
-    // weeks.forEach(element => {
-    //     rows.push(<Nav.Link key={element.id_week} href={window.location.href+'/week/'+element.id_week}>{element.name_week}</Nav.Link>);
-    // });
-    // return <>{rows}</>;
+    if(details)
+    {
+        return(
+            <Col>
+            <br />
+            <Card>
+            <Card.Body>
+                <Card.Title>Get started today</Card.Title>
+                    <Card.Text>
+                    You have already enrolled in this course.
+                    </Card.Text>
+                    <Link  className="bg-dark btn" to={'/learn/'+id_class} style={{color:'white', width:'100%'}}>
+                        Go to Course
+                    </Link>
+            </Card.Body>
+            </Card>
+            <br />
+            </Col> 
+        )
+    }
+    else{
+        return(
+            <Col>
+            <br />
+            <Card>
+            <Card.Body>
+                <Card.Title>Get started today</Card.Title>
+                    <Card.Text>
+                    Enroll in a course or request more information about the program.
+                    </Card.Text>
+                    <button className="bg-dark" style={{color:'white', width:'100%'}}>
+                        Enroll Now
+                    </button>
+                    <hr></hr>
+                    <button className="bg-white" style={{color:'black', width:'100%'}}>
+                        Request Info
+                    </button>
+            </Card.Body>
+            </Card>
+            <br />
+            </Col> 
+        )
+    }
 }

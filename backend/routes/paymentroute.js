@@ -1,7 +1,7 @@
 require("dotenv").config()
 const express = require("express")
 const router = express.Router()
-const paypal = require('paypal-rest-sdk')
+// const paypal = require('paypal-rest-sdk')
 const classmd = require("../models/classmd")
 
 paypal.configure({

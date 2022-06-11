@@ -12,7 +12,6 @@ export default class CourseDetail extends Component {
   render() {
     return (
         <>
-        <GetCourseDetailByIdClass />
             <Container className='bg-dark container-fluid'>
             <Row xs="auto" md={3}>
             <Col>
@@ -25,24 +24,7 @@ export default class CourseDetail extends Component {
                 </Card>
                 </Col>
                 <Col></Col>
-                <Col>
-                <Card>
-                <Card.Header></Card.Header>
-                <Card.Body>
-                    <Card.Title>Get started today</Card.Title>
-                        <Card.Text>
-                        Enroll in a course or request more information about the program.
-                        </Card.Text>
-                        <button className="bg-dark" style={{color:'white', width:'100%'}}>
-                            Enroll Now
-                        </button>
-                        <hr></hr>
-                        <button className="bg-white" style={{color:'black', width:'100%'}}>
-                            Request Info
-                        </button>
-                </Card.Body>
-                </Card>
-                </Col>
+                <GetCourseDetailByIdClass />
             </Row>
             </Container>
             <Row>

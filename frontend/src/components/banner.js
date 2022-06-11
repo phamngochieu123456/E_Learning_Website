@@ -10,6 +10,7 @@ import {
     MDBCarouselItem,
     MDBCarouselElement,
   } from 'mdb-react-ui-kit';
+import { Carousel } from 'react-bootstrap'
 export default class Banner extends Component {
   render() {
     return (
@@ -18,6 +19,10 @@ export default class Banner extends Component {
             <MDBCarouselInner>
                 <MDBCarouselItem className='active'>
                 <MDBCarouselElement src={image1} style={{height:600}} alt='...'/>
+                  <Carousel.Caption>
+                    <h1 className='fw-bold'>Our Vision</h1>
+                    <h3 className='fw-bold'>We envision a world where anyone, anywhere has the power to transform their life through learning.</h3>
+                  </Carousel.Caption>
                 </MDBCarouselItem>
                 <MDBCarouselItem>
                 <MDBCarouselElement src={image2} style={{height:600}} alt='...' />

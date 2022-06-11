@@ -28,7 +28,7 @@ export default class NavbarUnlogged extends Component {
                 </li>
                 <li className="nav-item">
                   <Link className="nav-link" to={'/courses'}>
-                    Course
+                    Courses
                   </Link>
                 </li>
                 <li className="nav-item">

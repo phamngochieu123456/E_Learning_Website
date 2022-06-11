@@ -1,6 +1,6 @@
 var classctrl = module.exports
 const classmd = require("../models/classmd")
-const moment = require("moment")
+// const moment = require("moment")
 
 classctrl.getAllClass = (req,res)=>{
   classmd.getAllClass((err,classes)=>{

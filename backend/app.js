@@ -11,11 +11,22 @@ const authroute = require("./routes/authroute")
 const videoroute = require("./routes/videoroute")
 const classroute = require("./routes/classroute")
 const pdfroute = require("./routes/pdfroute")
-const paymentroute = require("./routes/paymentroute")
+// const paymentroute = require("./routes/paymentroute")
 
 const app = express()
 
-app.use(cors({ origin: "http://localhost:3000", credentials: true }))
+var whitelist = ['http://localhost:3000', 'http://localhost:8000']
+var corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  },
+  credentials: true
+}
+app.use(cors(corsOptions))
 
 app.set('view engine', 'ejs');
 app.use(express.static("./public"))
@@ -42,7 +53,7 @@ app.use("/auth",authroute)
 app.use("/video",videoroute)
 app.use("/class",classroute)
 app.use("/pdf",pdfroute)
-app.use("/payment",paymentroute)
+// app.use("/payment",paymentroute)
 
 app.listen(process.env.PORT,()=>{
   console.log(`Server is running on port ${process.env.PORT}`)
