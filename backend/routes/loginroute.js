@@ -30,4 +30,6 @@ router.route("/islogin")
 
 router.post("/signin",accountctrl.insertAccountUser)
 
+router.put("/updatepassword",accountctrl.UpdatePassAccountById)
+
 module.exports = router

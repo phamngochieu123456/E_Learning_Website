@@ -158,3 +158,44 @@ accountctrl.insertAccountUser = (req,res)=>{
   },accountlist,userlist)
 
 }
+
+accountctrl.UpdatePassAccountById = (req,res)=>{
+  const id_account = req.body.id_account
+  const pass_account  = req.body.pass_account
+  const pass_account_hash = bcrypt.hashSync(pass_account,5)
+
+  const accountlist = [pass_account_hash,id_account]
+
+  accountmd.UpdatePassAccountByIdAccount((err,results)=>{
+    if(err)
+    {
+      console.log("Error1: " + err)
+    }
+    else
+    {
+      res.json({success: true, data: results}) 
+    } 
+  },accountlist)
+
+}
+
+accountctrl.UpdateUserByIdUser = (req,res)=>{
+  const phone_user = req.body.phone_user
+  const birth_user = req.body.birth_user
+  const sex_user = req.body.sex_user
+  const name_user = req.body.name_user
+  const id_user = req.body.id_user
+
+  const userlist = [phone_user, birth_user, sex_user, name_user, id_user]
+
+  accountmd.UpdateUserByIdUser((err,results)=>{
+    if(err)
+    {
+      console.log("Error1: " + err)
+    }
+    else
+    {
+      res.json({success: true, data: results}) 
+    } 
+  },userlist)
+}

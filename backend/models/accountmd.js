@@ -163,7 +163,33 @@ accountmd.insertAccountUser = async (result,accountlist, userlist) => {
     var sql2 = "INSERT INTO user (id_account, phone_user, birth_user, sex_user, id_type_user, name_user, id_user) VALUES ?"
     userlist[0].splice(4,1,type_user.id_type_user)
     const results = await query(sql2,[userlist])
-    result(null,"Insert Success!!!")
+    result(null,results)
+  }
+  catch(err)
+  {
+    result(err,null)
+  }
+}
+
+accountmd.UpdatePassAccountByIdAccount = async (result,accountlist) => {
+  try
+  {
+    var sql = "UPDATE account SET pass_account = ? WHERE id_account = ?"
+    const results = await query(sql,accountlist)
+    result(null,results)
+  }
+  catch(err)
+  {
+    result(err,null)
+  }
+}
+
+accountmd.UpdateUserByIdUser = async (result,userlist) => {
+  try
+  {
+    var sql = "UPDATE user SET phone_user = ?, birth_user = ?, sex_user = ?, name_user = ? WHERE id_user = ?"
+    const results = await query(sql,userlist)
+    result(null,results)
   }
   catch(err)
   {
