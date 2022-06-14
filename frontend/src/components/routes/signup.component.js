@@ -32,14 +32,15 @@ handleSubmit = async (event) => {
       data: this.state
     }
     const res = await axios(config)
-    // if(res.data.success)
-    // {
-    //   console.log("data: " + JSON.stringify(res.data.data))
-    // }
-    // else
-    // {
-    //   console.log("Error: " + res.data.data)
-    // }
+    if(res.data.success)
+    {
+      alert("Đăng ký tài khoản thành công")
+      window.location.href = 'http://localhost:3000/login'
+    }
+    else
+    {
+      console.log("Error: " + res.data.data)
+    }
   }
   catch(err)
   {
