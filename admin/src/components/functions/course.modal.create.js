@@ -1,5 +1,7 @@
 import { Button, Form, Modal } from "react-bootstrap";
 import { useState } from "react";
+import axios from "axios"
+
 
 export function CourseModalCreate() {
     const [show, setShow] = useState(false);
@@ -9,16 +11,27 @@ export function CourseModalCreate() {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    const handleSubmit = () =>{
-        // const config = {
-        //     method: 'post',
-        //     url: 'http://localhost:5000/auth/jwt',
-        //     withCredentials: true,
-        //     headers: { 'Authorization': "Bearer " + accesstoken}
-        //   }
-        //   const res = await axios(config)
-        handleClose()
-        window.location.href = window.location.href
+    const handleSubmit = async () =>
+    {
+
+      console.log(data)
+      console.log(data.image)
+
+      const payload = new FormData()
+      payload.append("class",data.class)
+      payload.append("image_class",data.image)
+      payload.append("name_class",data.title)
+      payload.append("description_class",data.description)
+      payload.append("overview_class",data.overview)
+      payload.append("price_class",data.price)
+      const config = {
+        method: 'post',
+        url: 'http://localhost:5000/class/insertClass',
+        data: payload,
+        headers: {'Content-Type': 'multipart/form-data'}
+      }
+      const res = await axios(config)
+      console.log(JSON.stringify(res))
     }
     return (
       <>
@@ -47,15 +60,27 @@ export function CourseModalCreate() {
                 <Form.Control 
                     as="textarea" 
                     required
-                    rows={3} 
+                    rows={2} 
                     value={data.description}
                     onChange={e => {data.description = e.target.value} }
+                    />
+              </Form.Group>
+              <Form.Group
+                className="mb-3"
+              >
+                <Form.Label>Overview</Form.Label>
+                <Form.Control 
+                    as="textarea" 
+                    required
+                    rows={4} 
+                    value={data.overview}
+                    onChange={e => {data.overview = e.target.value} }
                     />
               </Form.Group>
               <Form.Group className="mb-3">
                 <Form.Label>Price</Form.Label>
                 <Form.Control
-                  type="text"
+                  type="number"
                   required
                   value={data.price}
                   onChange={e => {data.price = e.target.value} }
@@ -66,8 +91,17 @@ export function CourseModalCreate() {
                 <Form.Control
                   type="file"
                   required
-                  value={data.files}
-                  onChange={e => {data.files = e.target.value} }
+                  value={data.class}
+                  onChange={e => {data.class = e.target.files[0]} }
+                />
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>Image</Form.Label>
+                <Form.Control
+                  type="file"
+                  required
+                  value={data.image}
+                  onChange={e => {data.image = e.target.files[0]} }
                 />
               </Form.Group>
             </Form>

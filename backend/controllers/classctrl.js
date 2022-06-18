@@ -112,3 +112,11 @@ classctrl.getIdTypeUserByName = (req,res)=>{
     }
   },req.body.name_type_user)
 }
+
+classctrl.insertClass = (req,res)=>{
+  
+  console.log(JSON.stringify(req.body))
+  console.log("req.files: " + JSON.stringify(req.files))
+  res.send("success")
+
+}
