@@ -15,6 +15,23 @@ export const GetCourseDetailByIdClass = () =>
 
     const [details,setDetails] = useState([])
 
+    const handleClick = async () =>{
+        const config = {
+            method: 'post',
+            url: 'http://localhost:5000/payment/pay',
+            withCredentials: true,
+            data: {id_class: id_class}
+        }
+        const res = await axios(config)
+        if(res.data.success)
+        {
+            window.location.href = res.data.data
+        }
+        else
+        {
+            console.log(JSON.stringify(res))
+        }
+    }
     useEffect(()=>{
         const config = {
             method: 'post',
@@ -26,7 +43,7 @@ export const GetCourseDetailByIdClass = () =>
             setDetails(res.data.success)
         })
     },[])
-    if(details)
+    if(!details)
     {
         return(
             <Col>
@@ -56,7 +73,7 @@ export const GetCourseDetailByIdClass = () =>
                     <Card.Text>
                     Enroll in a course or request more information about the program.
                     </Card.Text>
-                    <button className="bg-dark" style={{color:'white', width:'100%'}}>
+                    <button className="bg-dark" style={{color:'white', width:'100%'}} onClick={handleClick}>
                         Enroll Now
                     </button>
                     <hr></hr>

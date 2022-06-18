@@ -17,6 +17,7 @@ export function CourseModalDelete(props) {
         //   }
         //   const res = await axios(config)
           handleClose()
+          window.location.href = window.location.href
     }
     return (
       <>

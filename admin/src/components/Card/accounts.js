@@ -4,21 +4,21 @@ import { CourseModal } from '../functions/course.modal';
 import { CourseModalDelete } from '../functions/course.modal.delete';
 import { CourseModalCreate } from '../functions/course.modal.create';
 
-export default class Courses extends Component {
+export default class Accounts extends Component {
     constructor(props) {
         super(props);
         this.columns = [
             {
-                key: "name_class",
-                text: "Name",
-                className: "name_class",
+                key: "id_account",
+                text: "ID",
+                className: "id_account",
                 align: "left",
                 sortable: true,
             },
             {
-                key: "description_class",
-                text: "Description",
-                className: "description_class",
+                key: "name_account",
+                text: "Name",
+                className: "name_account",
                 align: "left",
                 sortable: true
             },
@@ -57,32 +57,6 @@ export default class Courses extends Component {
         this.state = {
             records: props.data
         }
-        // this.extraButtons =[
-        //     {
-        //         className:"btn btn-primary buttons-pdf",
-        //         title:"Create new Course",
-        //         children:[
-        //             <AiTwotoneFileExcel aria-hidden='true'></AiTwotoneFileExcel>
-        //         ],
-        //         onClick:(event)=>{
-        //             console.log(event);
-        //         },
-        //     },
-        //     {
-        //         className:"btn btn-primary buttons-pdf",
-        //         title:"Print",
-        //         children:[
-        //             <AiFillPrinter aria-hidden='true'></AiFillPrinter>
-        //         ],
-        //         onClick:(event)=>{
-        //             console.log(event);
-        //         },
-        //         onDoubleClick:(event)=>{
-        //             console.log("doubleClick")
-        //         }
-        //     },
-            
-        // ]
     }
 
     render() {
