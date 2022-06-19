@@ -6,7 +6,7 @@ import { CardCourseIPData } from '../functions/cardcourse.inprogress.data'
 export default class InProgress extends Component {
   componentDidMount()
   {
-
+    document.title = 'DUT-Elearning | In Progress';
     async function islogin()
     {
       try

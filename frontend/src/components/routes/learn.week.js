@@ -3,6 +3,9 @@ import { Row, Tab } from 'react-bootstrap'
 import '../../assets/css/home.css'
 import { CardTopicData } from '../functions/cardtopic.data'
 export default class LearnWeek extends Component {
+  componentDidMount() {
+    document.title = 'DUT-Elearning | LearnWeek';
+  }
   render() {
     return (
         <div className='container-fluid'>

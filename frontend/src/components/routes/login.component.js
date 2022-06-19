@@ -19,6 +19,9 @@ export default class Login extends Component {
     }
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+  componentDidMount() {
+    document.title = 'DUT-Elearning | Login';
+  }
   handleChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value

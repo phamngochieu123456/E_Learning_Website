@@ -4,6 +4,9 @@ import Background from '../../assets/images/background-sologan.png'
 import Partner from '../../assets/images/partner-logos.png'
 import Banner from '../banner'
 export default class About extends Component {
+  componentDidMount() {
+    document.title = 'DUT-Elearning | About';
+  }
   render() {
     return (
     <div className="container-fluid" >

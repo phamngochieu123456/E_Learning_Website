@@ -23,7 +23,7 @@ export default class Accounts extends Component {
                 sortable: true
             },
             {
-                key: "active_class",
+                key: "active_account",
                 text: "State",
                 className: "active_class",
                 sortable: true

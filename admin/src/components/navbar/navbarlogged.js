@@ -66,8 +66,7 @@ export default class NavbarLogged extends Component {
               <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
                     <NavDropdown title={JSON.parse(localStorage.getItem("account")).name_account} id="navbarScrollingDropdown">
-                    <NavDropdown.Item href="/account-profile">Profile</NavDropdown.Item>
-                    <NavDropdown.Item href="/settings">Settings</NavDropdown.Item>
+                    <NavDropdown.Item href="/admin/settings">Settings</NavDropdown.Item>
                     <NavDropdown.Divider />
                     <Logout />
                     </NavDropdown>

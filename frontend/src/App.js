@@ -34,7 +34,7 @@ function App() {
         </header>
             <Routes>
               <Route exact path="/" element={<Homepage />} />
-              <Route path="/login" element={<div className="auth-wrapper"><Login /></div>}/>
+              <Route path="/login" element={<div className="auth-wrapper"><Login /></div>} />
               <Route path="/sign-up" element={value==="true"?<Navigate to="/dashboard" />:<div className="auth-wrapper"><SignUp /></div>}/>
               <Route path="/forgot-password" element={value==="true"?<Navigate to="/dashboard" />:<div className="auth-wrapper"><ForgotPassword /></div>}/>
               <Route path="/dashboard" element={<Dashboard />}/>

@@ -16,7 +16,9 @@ export default class SignUp extends Component {
   }
   this.handleSubmit = this.handleSubmit.bind(this);
 }
-
+componentDidMount() {
+  document.title = 'DUT-Elearning | Sign Up';
+}
 handleChange = (event) => {
   this.setState({
     [event.target.name]: event.target.value

@@ -4,6 +4,7 @@ import '../../assets/css/home.css'
 export default class Dashboard extends Component {
   componentDidMount()
   {
+    document.title = 'DUT-Elearning Admin | Dashboard';
     async function islogin()
     {
       try

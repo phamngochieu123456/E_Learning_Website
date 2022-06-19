@@ -4,6 +4,9 @@ import { BiEdit } from "react-icons/bi";
 import { AiFillDelete, AiFillPrinter, AiTwotoneFileExcel } from "react-icons/ai";
 
 export default class Accounts extends Component {
+    componentDidMount() {
+        document.title = 'DUT-Elearning Admin | Accounts';
+      }
     constructor(props) {
         super(props);
         this.columns = [

@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import error from '../../assets/images/404 Page.gif'
 export default class Errorpages extends Component {
+  componentDidMount() {
+    document.title = 'DUT-Elearning | Error';
+  }
   render() {
     return (
         <div className="container-fluid" >

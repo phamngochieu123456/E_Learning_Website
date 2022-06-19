@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import success from '../../assets/images/warning.png'
 export default class PaymentCancel extends Component {
+  componentDidMount() {
+    document.title = 'DUT-Elearning | Payment Cancel';
+  }
   render() {
     return (
         <div className="container-fluid" >

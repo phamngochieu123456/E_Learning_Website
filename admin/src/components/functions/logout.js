@@ -18,7 +18,7 @@ export const Logout = () =>{
             localStorage.removeItem("islogin")
             localStorage.removeItem("accesstoken")
             localStorage.removeItem("refreshtoken")
-            window.location.href = "http://localhost:3000/login"
+            window.location.href = "http://localhost:8000/"
         }
         catch(err)
         {

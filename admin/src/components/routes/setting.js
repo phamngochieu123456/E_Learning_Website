@@ -19,6 +19,9 @@ export default class Settings extends Component {
       [event.target.name]: event.target.value
     });
   }
+  componentDidMount() {
+    document.title = 'DUT-Elearning Admin | Setting';
+  }
   handleSubmit = async (event) => {
     try
     {
@@ -43,7 +46,7 @@ export default class Settings extends Component {
   }
   render() {
     return (
-      <div className="auth-inner">
+      <div className="auth-inner" style={{margin:'15%',paddingLeft:'20%',paddingRight:'20%'}}>
         <div className="mb-2">
               <section>
                   <p style={{fontSize:30}}>Change password</p>

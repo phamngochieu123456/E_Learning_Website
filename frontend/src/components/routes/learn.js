@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom'
 import '../../assets/css/home.css'
 import { GetWeekByIdClass } from '../functions/cardweek.data'
 export default class Learn extends Component {
+  componentDidMount() {
+    document.title = 'DUT-Elearning | Learn';
+  }
   render() {
     return (
         <div className='container-fluid'>

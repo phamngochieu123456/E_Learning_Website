@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import success from '../../assets/images/check.png'
 export default class PaymentSuccess extends Component {
+  componentDidMount() {
+    document.title = 'DUT-Elearning | Payment Success';
+  }
   render() {
     return (
         <div className="container-fluid" >

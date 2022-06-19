@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 export default class forgotPassword extends Component {
+  componentDidMount() {
+    document.title = 'DUT-Elearning | Forgot Password';
+  }
   render() {
     return (
       <div className='auth-inner'>

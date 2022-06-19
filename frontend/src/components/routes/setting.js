@@ -4,7 +4,9 @@ import '../../assets/css/login.component.css'
 import axios from 'axios'
 
 export default class Settings extends Component {
-
+  componentDidMount() {
+    document.title = 'DUT-Elearning | Settings';
+  }
   constructor(props){
       super(props);
       const account = JSON.parse(localStorage.getItem("user"));

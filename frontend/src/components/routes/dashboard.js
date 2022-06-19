@@ -5,6 +5,8 @@ import { CardCourseData } from '../functions/cardcourse.data'
 export default class Dashboard extends Component {
   componentDidMount()
   {
+    document.title = 'DUT-Elearning | Dashboard';
+    
     async function islogin()
     {
       try

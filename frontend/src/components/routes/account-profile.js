@@ -5,7 +5,9 @@ import '../../assets/css/login.component.css'
 import axios from 'axios'
 
 export default class Account_profile extends Component {
-
+  componentDidMount() {
+    document.title = 'DUT-Elearning | Profile';
+  }
   constructor(props){
       super(props);
       const account = JSON.parse(localStorage.getItem("user"));
@@ -36,7 +38,7 @@ export default class Account_profile extends Component {
 
       if(res.data.success)
       {
-          console.log(JSON.stringify(res.data))
+          console.log(JSON.stringify(res.data)) 
       }
       console.log(JSON.stringify(res))
     }
