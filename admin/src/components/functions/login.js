@@ -14,7 +14,7 @@ export async function authjwt()
     const res = await axios(config)
     if(res.data.success)
     {
-        window.location.href = "http://localhost:8000/admin/dashboard"
+      window.location.href = "http://localhost:8000/admin/dashboard"
     }
     else
     {

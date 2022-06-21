@@ -28,6 +28,30 @@ export default class Login extends Component {
     try
     {
       event.preventDefault();
+
+      const payload1 = this.state;
+      const config1 = {
+        method: 'post',
+        url: 'http://localhost:5000/user/gettypeuser',
+        withCredentials: true,
+        data: payload1,
+        headers: {
+          authorization: ' JWT fefege...' ,
+          'Content-Type': 'application/json'
+        }    
+      }
+      const res1 = await axios(config1)
+
+      if(res1.data.success && res1.data.data.name_type_user != "STUDENT")
+      {
+        localStorage.setItem("type_user", JSON.stringify(res1.data.data))
+      }
+      else
+      {
+        alert("You do not have permission to access to this!!!")
+        return
+      }
+
       const payload = this.state;
       const config = {
         method: 'post',
