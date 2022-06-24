@@ -21,6 +21,19 @@ classctrl.getAllClass = (req,res)=>{
   })
 }
 
+classctrl.getClassByIdUser = (req,res)=>{
+  classmd.getClassByIdUser((err,classes)=>{
+    if(err)
+    {
+      res.json({success: false, data: err})
+    }
+    else
+    {
+      res.json({success: true, data: classes})
+    }
+  },req.body.id_user)
+}
+
 classctrl.getWeekByIdClass = (req,res)=>{
   classmd.getWeekByIdClass((err,weeks)=>{
     if(err)
@@ -289,7 +302,8 @@ classctrl.insertClassData = async (req,res)=>{
   }
 }
 
-classctrl.updateClass = (req,res)=>{
+classctrl.updateClass = async (req,res)=>{
+  const id_user = req.body.id_user
   const id_class = req.body.id_class
   const name_class = req.body.name_class
   const price_class = req.body.price_class
@@ -297,34 +311,52 @@ classctrl.updateClass = (req,res)=>{
   const overview_class = req.body.overview_class
   const listclasses = [name_class,price_class,description_class,overview_class,id_class]
 
-  const ext = path.extname(req.file.image_class.originalname)
-  fs.renameSync("./class_rawdata/" + req.file.image_class.originalname, "./public/imgclass/" + id_class + ext);
+  if(await classmd.isTeacherClass(id_user,id_class))
+  {
+    const ext = path.extname(req.file.image_class.originalname)
+    fs.renameSync("./class_rawdata/" + req.file.image_class.originalname, "./public/imgclass/" + id_class + ext);
 
-  classmd.updateClass((err,results)=>{
-    if(err)
-    {
-      res.json({success: false, data: err})
-    }
-    else
-    {
-      res.json({success: true, data: results})
-    }
-  },listclasses)
+    classmd.updateClass((err,results)=>{
+      if(err)
+      {
+        res.json({success: false, data: err})
+      }
+      else
+      {
+        res.json({success: true, data: results})
+      }
+    },listclasses)
+  }
+  else
+  {
+    fs.unlinkSync("./class_rawdata/" + req.file.image_class.originalname)
+    res.json({success: false, data: "You are not teacher of this class!!!"})
+  }
+  
 }
 
-classctrl.deleteClass = (req,res)=>{
+classctrl.deleteClass = async (req,res)=>{
+  const id_user = req.body.id_user
   const id_class = req.body.id_class
   const listclasses = [id_class]
-  classmd.deleteClass((err,results)=>{
-    if(err)
-    {
-      res.json({success: false, data: err})
-    }
-    else
-    {
-      res.json({success: true, data: results})
-    }
-  },listclasses)
+
+  if(await classmd.isTeacherClass(id_user,id_class))
+  {
+    classmd.deleteClass((err,results)=>{
+      if(err)
+      {
+        res.json({success: false, data: err})
+      }
+      else
+      {
+        res.json({success: true, data: results})
+      }
+    },listclasses)
+  }
+  else
+  {
+    res.json({success: false, data: "You are not teacher of this class!!!"})
+  }
 }
 
 

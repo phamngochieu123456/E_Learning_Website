@@ -20,6 +20,7 @@ const fileStorageEngine = multer.diskStorage({
 const upload = multer({storage: fileStorageEngine})
 
 router.get("/getallclass",classctrl.getAllClass)
+router.post("getClassByIdUser",classctrl.getClassByIdUser)
 router.post("/getWeekByIdClass",classctrl.getWeekByIdClass)
 router.post("/getTopicByIdWeek",classctrl.getTopicByIdWeek)
 router.post("/getSubTopicByIdTopic",classctrl.getSubTopicByIdTopic)

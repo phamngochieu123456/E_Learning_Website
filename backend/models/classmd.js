@@ -15,6 +15,20 @@ classmd.getAllClass = async (result) =>{
   }
 }
 
+classmd.getClassByIdUser = async (result,id_user) =>{
+  try
+  {
+    const sql = `SELECT * FROM class INNER JOIN list_classes ON class.id_class = list_classes.id_class WHERE 
+    list_classes.id_user = "` + id_user + `"`
+    var results = await query(sql)
+    result(null,results)
+  }
+  catch(err)
+  {
+    result(err,null)
+  }
+}
+
 classmd.getClassById = async (result,id_class) =>{
   try
   {
@@ -26,6 +40,24 @@ classmd.getClassById = async (result,id_class) =>{
     result(err,null)
   }
 }
+
+classmd.getClassById_Data = async (id_class) =>{
+  try
+  {
+    const results = await query("select * from class where id_class = \"" + id_class + "\"" +"and active_class = 1")
+    const json = {success: true, data: results[0]}
+    const jsonstr = JSON.stringify(json)
+    return jsonstr
+  }
+  catch(err)
+  {
+    const json = {success: false, data: err.message}
+    const jsonstr = JSON.stringify(json)
+    return jsonstr
+  }
+}
+
+
 
 classmd.getWeekByIdClass = async (result,id_class) =>{
   try
@@ -202,6 +234,29 @@ classmd.insertLissClasses = async (result,lclist) =>{
   }
 }
 
+classmd.isTeacherClass = async (id_user,id_class) => {
+  try
+  {
+    const sql = `SELECT * FROM (list_classes INNER JOIN user ON list_classes.id_user = user.id_user) INNER JOIN type_user ON 
+    type_user.id_type_user = user.id_type_user WHERE list_classes.id_class = "` + id_class + `"` + `and list_classes.id_user = "` 
+    + id_user + `"` + `and type_user.name_type_user = "TEACHER"`
+    var results = await query(sql)
+    if(results.length>0)
+    {
+      return true
+    }
+    else
+    {
+      return false
+    }    
+  }
+  catch(err)
+  {
+    console.log("Error: " + err)
+    return false
+  }
+}
+
 classmd.updateClass = async (result, listclasses) => {
   try
   {
@@ -228,7 +283,7 @@ classmd.deleteClass = async (result, listclasses) => {
   }
 }
 
-classmd.deleteAll = async (result,id_class) => {
+classmd.deleteAll = async (result) => {
   try
   {
     await query("DELETE FROM listclasses")
@@ -245,5 +300,30 @@ classmd.deleteAll = async (result,id_class) => {
   catch(err)
   {
     result(err,null)
+  }
+}
+
+classmd.isDocumentUser = async (id_account,id_document) => {
+  try
+  {
+    const sql = `SELECT * FROM account INNER JOIN user ON account.id_account = user.id_account INNER JOIN 
+    list_classes ON user.id_user = list_classes.id_user INNER JOIN class ON list_classes.id_class = class.id_class INNER JOIN week 
+    ON class.id_class = week.id_class INNER JOIN topic ON week.id_week = topic.id_week INNER JOIN sub_topic ON 
+    topic.id_topic = sub_topic.id_topic INNER JOIN document ON sub_topic.id_sub_topic = document.id_sub_topic WHERE document.id_document = "` 
+    + id_document + `"` + `and account.id_account = "` + id_account + `"`
+    var results = await query(sql)
+    if(results.length>0)
+    {
+      return true
+    }
+    else
+    {
+      return false
+    }    
+  }
+  catch(err)
+  {
+    console.log("Error: " + err)
+    return false
   }
 }
