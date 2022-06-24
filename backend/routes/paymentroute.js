@@ -3,8 +3,10 @@ const express = require("express")
 const router = express.Router()
 const paypal = require('paypal-rest-sdk')
 const classmd = require("../models/classmd")
-const payoutsSdk = require('@paypal/payouts-sdk');
-const payPalClient = require('./payPalClient');
+const payoutsSdk = require('@paypal/payouts-sdk')
+const payPalClient = require('./payPalClient')
+const paymentctrl = require("../controllers/paymentctrl")
+
 
 paypal.configure({
   'mode': 'sandbox',
@@ -14,66 +16,7 @@ paypal.configure({
 
 var total = 0
 
-router.post("/pay",(req,res)=>{
-  classmd.getClassById((err,classes)=>{
-    if(err)
-    {
-      console.log("Error: " + err)
-      res.json({success: false, data: err})
-    }
-    else
-    {
-
-      total = classes.price_class
-
-      const items = {
-        "name": classes.name_class,
-        "sku": classes.id_class,
-        "price": classes.price_class,
-        "currency": "USD",
-        "quantity": 1
-      }
-
-      const create_payment_json = {
-        "intent": "sale",
-        "payer": {
-            "payment_method": "paypal"
-        },
-        "redirect_urls": {
-            "return_url": "http://localhost:5000/payment/success",
-            "cancel_url": "http://localhost:3000/payment-cancel"
-        },
-        "transactions": [{
-            "item_list": {
-                "items": [items]
-            },
-            "amount": {
-                "currency": "USD",
-                "total": total.toString()
-            },
-            "description": "Hat for the best team ever"
-        }]
-      }
-
-      paypal.payment.create(create_payment_json, function (error, payment) {
-        if (error) 
-        {
-          console.log("Error 1: " + error)
-          res.json({success: false, data: err})
-        } 
-        else 
-        {
-          for(let i = 0;i < payment.links.length;i++){
-            if(payment.links[i].rel === 'approval_url'){
-              res.json({success: true, data: payment.links[i].href})
-            }
-          }
-        }
-      });
-
-    }
-  },req.body.id_class)
-})
+router.post("/pay",paymentctrl.pay)
 
 router.get('/success', (req, res) => {
   const payerId = req.query.PayerID;

@@ -27,7 +27,7 @@ authmiddleware.isTeacher = (req, res, next) => {
     const account = req.user
     if(account)
     {
-      accountmd.IsTeacher((err,users)=>{
+      accountmd.isTeacher((err,users)=>{
         if(err)
         {
           console.log("Error: " + err)
@@ -57,7 +57,7 @@ authmiddleware.isAdmin = (req, res, next) => {
     const account = req.user
     if(account)
     {
-      accountmd.IsAdmin((err,users)=>{
+      accountmd.isAdmin((err,users)=>{
         if(err)
         {
           console.log("Error: " + err)

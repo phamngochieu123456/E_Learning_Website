@@ -29,7 +29,7 @@ router.post("/isExistUserWithClass",classctrl.isExistUserWithClass)
 router.post("/getIdTypeUserByName",classctrl.getIdTypeUserByName)
 router.post("/insertClass",isTeacher,upload.fields([{name: "class", maxCount: 1}, {name: "image_class", maxCount: 1}]),classctrl.decompressClass,
 classctrl.insertClassData)
-router.put("/updateClass",isAdmin,upload.single("image_class"),classctrl.updateClass)
-router.delete("/deleteClass",isAdmin,classctrl.deleteClass)
+router.put("/updateClass",upload.single("image_class"),classctrl.updateClass)
+router.delete("/deleteClass",classctrl.deleteClass)
 
 module.exports = router

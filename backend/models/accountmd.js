@@ -238,7 +238,7 @@ accountmd.GetTypeUser = async (result,email) => {
   }
 }
 
-accountmd.IsTeacher = async (result,id_account) => {
+accountmd.isTeacher = async (result,id_account) => {
   try
   {
     const sql = `SELECT * FROM (account INNER JOIN user ON account.id_account = user.id_account) INNER JOIN type_user 
@@ -262,7 +262,7 @@ accountmd.IsTeacher = async (result,id_account) => {
   }
 }
 
-accountmd.IsAdmin = async (result,id_account) => {
+accountmd.isAdmin = async (result,id_account) => {
   try
   {
     const sql = `SELECT * FROM (account INNER JOIN user ON account.id_account = user.id_account) INNER JOIN type_user 

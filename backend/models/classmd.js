@@ -57,8 +57,6 @@ classmd.getClassById_Data = async (id_class) =>{
   }
 }
 
-
-
 classmd.getWeekByIdClass = async (result,id_class) =>{
   try
   {
@@ -243,24 +241,29 @@ classmd.isTeacherClass = async (id_user,id_class) => {
     var results = await query(sql)
     if(results.length>0)
     {
-      return true
+      const json = {success: true, data: results[0]}
+      const jsonstr = JSON.stringify(json)
+      return jsonstr
     }
     else
     {
-      return false
+      const json = {success: false, data: "You are not teacher of this class!!!"}
+      const jsonstr = JSON.stringify(json)
+      return jsonstr
     }    
   }
   catch(err)
   {
-    console.log("Error: " + err)
-    return false
+    const json = {success: false, data: err.message}
+    const jsonstr = JSON.stringify(json)
+    return jsonstr
   }
 }
 
 classmd.updateClass = async (result, listclasses) => {
   try
   {
-    var sql = "UPDATE class SET name_class = ?, price_class = ?, description_class = ?, overview_class = ? WHERE id_class = ?"
+    var sql = "UPDATE class SET name_class = ?, price_class = ?, img_path_class = ?, description_class = ?, overview_class = ? WHERE id_class = ?"
     const results = await query(sql,listclasses)
     result(null,results)
   }

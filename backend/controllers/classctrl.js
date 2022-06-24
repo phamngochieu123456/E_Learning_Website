@@ -1,5 +1,6 @@
 var classctrl = module.exports
 const classmd = require("../models/classmd")
+const accountmd = require("../models/accountmd")
 const util = require('util')
 const {unrar, list} = require("unrar-promise")
 const fs = require("fs")
@@ -303,44 +304,61 @@ classctrl.insertClassData = async (req,res)=>{
 }
 
 classctrl.updateClass = async (req,res)=>{
-  const id_user = req.body.id_user
-  const id_class = req.body.id_class
-  const name_class = req.body.name_class
-  const price_class = req.body.price_class
-  const description_class = req.body.description_class
-  const overview_class = req.body.overview_class
-  const listclasses = [name_class,price_class,description_class,overview_class,id_class]
-
-  if(await classmd.isTeacherClass(id_user,id_class))
+  const jsonstruser = await accountmd.isUser(req.user.id_account,req.body.id_user) 
+  const jsonuser = JSON.parse(jsonstruser)
+  if(jsonuser.success)
   {
-    const ext = path.extname(req.file.image_class.originalname)
-    fs.renameSync("./class_rawdata/" + req.file.image_class.originalname, "./public/imgclass/" + id_class + ext);
-
-    classmd.updateClass((err,results)=>{
-      if(err)
+    const id_user = req.body.id_user
+    const id_class = req.body.id_class
+    const name_class = req.body.name_class
+    const price_class = req.body.price_class
+    const description_class = req.body.description_class
+    const overview_class = req.body.overview_class
+    var img_path_class = ""
+    
+    const jsonstrclass = await classmd.isTeacherClass(id_user,id_class)
+    const jsonclass = JSON.parse(jsonstrclass)
+    if(jsonclass.success)
+    {
+      if(req.file)
       {
-        res.json({success: false, data: err})
+        const ext = path.extname(req.file.originalname)
+        fs.renameSync("./class_rawdata/" + req.file.originalname, "./public/imgclass/" + id_class + ext);
+        img_path_class = "/imgclass/" + id_class + ext
       }
-      else
-      {
-        res.json({success: true, data: results})
-      }
-    },listclasses)
+      const listclasses = [name_class, price_class, img_path_class, description_class, overview_class, id_class]
+      classmd.updateClass((err,results)=>{
+        if(err)
+        {
+          res.json({success: false, data: err.message})
+        }
+        else
+        {
+          res.json({success: true, data: results})
+        }
+      },listclasses)
+    }
+    else
+    {
+      fs.unlinkSync("./class_rawdata/" + req.file.originalname)
+      res.json({success: false, data: jsonclass.data})
+    }
   }
   else
   {
-    fs.unlinkSync("./class_rawdata/" + req.file.image_class.originalname)
-    res.json({success: false, data: "You are not teacher of this class!!!"})
+    res.status(401).json({success:false, data: 'You are not authorized'})
   }
-  
+
 }
 
 classctrl.deleteClass = async (req,res)=>{
   const id_user = req.body.id_user
   const id_class = req.body.id_class
   const listclasses = [id_class]
+  const jsonstrclass = await classmd.isTeacherClass(id_user,id_class)
+  const jsonclass = JSON.parse(jsonstrclass)
 
-  if(await classmd.isTeacherClass(id_user,id_class))
+  if(jsonclass.success)
   {
     classmd.deleteClass((err,results)=>{
       if(err)
@@ -355,7 +373,7 @@ classctrl.deleteClass = async (req,res)=>{
   }
   else
   {
-    res.json({success: false, data: "You are not teacher of this class!!!"})
+    res.json({success: false, data: jsonclass.data})
   }
 }
 
