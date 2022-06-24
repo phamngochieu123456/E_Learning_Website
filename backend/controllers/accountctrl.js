@@ -158,32 +158,23 @@ accountctrl.insertAccountUser = (req,res)=>{
 }
 
 accountctrl.updateAccount = async (req,res)=>{
-  const jsonstr = await accountmd.isUser(req.user.id_account,req.body.id_user) 
-  const json = JSON.parse(jsonstr)
   const jsonstradmin = await accountmd.isAdmin_Data(req.user.id_account)
   const jsonadmin  = JSON.parse(jsonstradmin)
-  if(json.success)
+  if(req.body.id_account == req.user.id_account || jsonadmin.success)
   {
-    if(jsonadmin.success)
-    {
-      const pass_account  = req.body.pass_account
-      const pass_account_hash = bcrypt.hashSync(pass_account,5)
-      const accountlist = [pass_account_hash, id_account]
-      accountmd.updateAccount((err,results)=>{
-        if(err)
-        {
-          console.log("Error1: " + err.message)
-        }
-        else
-        {
-          res.json({success: true, data: results}) 
-        } 
-      },accountlist)
-    }
-    else
-    {
-      res.json({success: false, data: jsonadmin.data})
-    }
+    const pass_account  = req.body.pass_account
+    const pass_account_hash = bcrypt.hashSync(pass_account,5)
+    const accountlist = [pass_account_hash, req.body.id_account]
+    accountmd.updateAccount((err,results)=>{
+      if(err)
+      {
+        console.log("Error1: " + err.message)
+      }
+      else
+      {
+        res.json({success: true, data: results}) 
+      } 
+    },accountlist)
   }
   else
   {
