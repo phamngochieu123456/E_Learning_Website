@@ -1,6 +1,7 @@
 import { Button, Form, Modal } from "react-bootstrap";
 import { useState } from "react";
 import { AiFillDelete } from "react-icons/ai";
+import axios from "axios";
 
 export function CourseModalDelete(props) {
     const [show, setShow] = useState(false);
@@ -8,16 +9,25 @@ export function CourseModalDelete(props) {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    const handleClick = () => {
-        // const config = {
-        //     method: 'post',
-        //     url: 'http://localhost:5000/auth/jwt',
-        //     withCredentials: true,
-        //     headers: { 'Authorization': "Bearer " + accesstoken}
-        //   }
-        //   const res = await axios(config)
-          handleClose()
-          window.location.href = window.location.href
+    const handleClick = async (event) => {
+      event.preventDefault()
+
+      const user = localStorage.getItem("user");
+      const userjson = JSON.parse(user)
+
+      const payload = {
+        id_class:props.data.id_class,
+        id_user:userjson.id_user
+      }
+      const config = {
+        method: 'delete',
+        url: 'http://localhost:5000/class/deleteClass',
+        withCredentials: true,
+        data: payload,
+      }
+      const res = await axios(config)
+      console.log(JSON.stringify(res))
+      window.location.href = window.location.href
     }
     return (
       <>

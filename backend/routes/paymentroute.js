@@ -4,7 +4,7 @@ const router = express.Router()
 const paypal = require('paypal-rest-sdk')
 const classmd = require("../models/classmd")
 const payoutsSdk = require('@paypal/payouts-sdk')
-const payPalClient = require('./payPalClient')
+const payPalClient = require('../controllers/payPalClient')
 const paymentctrl = require("../controllers/paymentctrl")
 
 

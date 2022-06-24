@@ -157,7 +157,7 @@ accountctrl.insertAccountUser = (req,res)=>{
 
 }
 
-accountctrl.updateAccount = (req,res)=>{
+accountctrl.updateAccount = async (req,res)=>{
   const jsonstr = await accountmd.isUser(req.user.id_account,req.body.id_user) 
   const json = JSON.parse(jsonstr)
   const jsonstradmin = await accountmd.isAdmin_Data(req.user.id_account)
