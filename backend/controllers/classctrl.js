@@ -354,31 +354,41 @@ classctrl.updateClass = async (req,res)=>{
 }
 
 classctrl.deleteClass = async (req,res)=>{
-  const id_user = req.body.id_user
-  const id_class = req.body.id_class
-  const listclasses = [id_class]
-  const jsonstrclassteacher = await classmd.isTeacherClass(id_user,id_class)
-  const jsonclassteacher = JSON.parse(jsonstrclassteacher)
-  const jsonstradmin = await accountmd.isAdmin_Data(req.user.id_account)
-  const jsonadmin  = JSON.parse(jsonstradmin)
-
-  if(jsonclassteacher.success || jsonadmin.success)
+  const jsonstruser = await accountmd.isUser(req.user.id_account,req.body.id_user) 
+  const jsonuser = JSON.parse(jsonstruser)
+  if(jsonuser.success)
   {
-    classmd.deleteClass((err,results)=>{
-      if(err)
-      {
-        res.json({success: false, data: err})
-      }
-      else
-      {
-        res.json({success: true, data: results})
-      }
-    },listclasses)
+    const id_user = req.body.id_user
+    const id_class = req.body.id_class
+    const listclasses = [id_class]
+    const jsonstrclassteacher = await classmd.isTeacherClass(id_user,id_class)
+    const jsonclassteacher = JSON.parse(jsonstrclassteacher)
+    const jsonstradmin = await accountmd.isAdmin_Data(req.user.id_account)
+    const jsonadmin  = JSON.parse(jsonstradmin)
+
+    if(jsonclassteacher.success || jsonadmin.success)
+    {
+      classmd.deleteClass((err,results)=>{
+        if(err)
+        {
+          res.json({success: false, data: err})
+        }
+        else
+        {
+          res.json({success: true, data: results})
+        }
+      },listclasses)
+    }
+    else
+    {
+      res.json({success: false, data: jsonclass.data})
+    }
   }
   else
   {
-    res.json({success: false, data: jsonclass.data})
+    res.status(401).json({success:false, data: 'You are not authorized'})
   }
+
 }
 
 
