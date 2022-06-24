@@ -1,24 +1,24 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import Courses from "../Card/courses";
+import Accounts from "../Card/accounts";
 
 export const AccountData = () =>
 {
-    const [classes,setClasses] = useState([])
+    const [accounts,setAccounts] = useState([])
 
     useEffect(()=>{
         const config = {
             method: 'get',
-            url: 'http://localhost:5000/class/getallclass',
+            url: 'http://localhost:5000/user/getAllAccounts',
             withCredentials: true
         }
         axios(config).then((res)=>{
-            setClasses(res.data.data)
+            setAccounts(res.data.data)
         })
     },[])
-    if (classes.length!=0)
+    if (accounts.length!=0)
     {
-        return <Courses data={classes} ></Courses>;
+        return <Accounts data={accounts} ></Accounts>;
     }
 
 }

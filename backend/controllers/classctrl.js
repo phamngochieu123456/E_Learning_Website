@@ -354,6 +354,7 @@ classctrl.updateClass = async (req,res)=>{
 }
 
 classctrl.deleteClass = async (req,res)=>{
+
   const jsonstruser = await accountmd.isUser(req.user.id_account,req.body.id_user) 
   const jsonuser = JSON.parse(jsonstruser)
   if(jsonuser.success)
