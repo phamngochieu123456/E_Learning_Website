@@ -3,6 +3,7 @@ import { BsBoxArrowInRight } from 'react-icons/bs';
 import profileImage from '../../assets/images/profile.png';
 import '../../assets/css/login.component.css'
 import axios from 'axios'
+import { ImageUpload } from '../functions/upload.image';
 
 export default class Account_profile extends Component {
   componentDidMount() {
@@ -17,6 +18,7 @@ export default class Account_profile extends Component {
         phoneNumber: account.phone_user,
         Birth: account.birth_user.substr(0,10),
         Gender: account.sex_user,
+        image:'',
     }
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -25,9 +27,15 @@ export default class Account_profile extends Component {
       [event.target.name]: event.target.value
     });
   }
+  handleClick = (event) => {
+    this.setState({
+      [event.target.name]: event.target.files[0]
+    });
+  }
   handleSubmit = async (event) => {
     try
     {
+      console.log(this.state)
       event.preventDefault();
       const payload = this.state;
       const headers = {
@@ -49,7 +57,7 @@ export default class Account_profile extends Component {
   }
   render() {
     return (
-      <div className="auth-inner">
+      <form className="auth-inner" onSubmit={this.handleSubmit}>
         <div className="mb-2">
               <section>
                   <p style={{fontSize:30}}>Edit my profile</p>
@@ -57,8 +65,12 @@ export default class Account_profile extends Component {
           </div>
           <hr/>
           <div className="mb-2">
-            <img src={profileImage} alt=""></img>
+            <img 
+              src={profileImage} 
+              alt=""
+              />
           </div>
+          <ImageUpload handleChange = {this.handleClick}/>
           <div className="mb-3">
             <input
               type="text"
@@ -84,7 +96,7 @@ export default class Account_profile extends Component {
           <div className="mb-3">
             <input
               type="date"
-              name='birth'
+              name='Birth'
               className="form-control"
               defaultValue={this.state.Birth}
               onChange={this.handleChange}
@@ -96,7 +108,7 @@ export default class Account_profile extends Component {
             <label>
               <input
                 type="radio"
-                name='gender'
+                name='Gender'
                 value="1"
                 defaultChecked={this.state.Gender ? '1' : ''}
                 onChange={this.handleChange}
@@ -108,7 +120,7 @@ export default class Account_profile extends Component {
                 <label>
                   <input
                     type="radio"
-                    name='gender'
+                    name='Gender'
                     value="0"
                     defaultChecked={!this.state.Gender ? '0' : ''}
                     onChange={this.handleChange}
@@ -126,7 +138,7 @@ export default class Account_profile extends Component {
           </div>
 
 
-      </div>
+      </form>
       
     );
   }  

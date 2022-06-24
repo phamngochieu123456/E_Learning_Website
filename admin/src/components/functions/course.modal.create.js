@@ -100,6 +100,7 @@ export function CourseModalCreate() {
                 <Form.Control
                   type="file"
                   required
+                  accept="image/*"
                   value={data.image}
                   onChange={e => {data.image = e.target.files[0]} }
                 />
