@@ -29,6 +29,7 @@
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
     "paypal-rest-sdk": "^1.8.1",
+    "unrar-promise": "^2.0.1",
     "util": "^0.12.4",
     "uuid": "^8.3.2"
   }

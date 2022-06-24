@@ -13,11 +13,7 @@ export const Logout = () =>{
                 headers: {authorization: ' JWT fefege...' ,'Content-Type': 'application/json'}
             }
             await axios(config)
-            localStorage.removeItem("account")
-            localStorage.removeItem("user")
-            localStorage.removeItem("islogin")
-            localStorage.removeItem("accesstoken")
-            localStorage.removeItem("refreshtoken")
+            localStorage.clear()
             window.location.href = "http://localhost:8000/"
         }
         catch(err)

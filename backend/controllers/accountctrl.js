@@ -127,9 +127,6 @@ accountctrl.getUserHome = (req,res)=>{
 }
 
 accountctrl.insertAccountUser = (req,res)=>{
-
-  console.log("req.body: " + JSON.stringify(req.body))
-
   const id_account = uuid.v4()
   const name_account = req.body.email
   const pass_account  = req.body.pass_account
@@ -159,14 +156,14 @@ accountctrl.insertAccountUser = (req,res)=>{
 
 }
 
-accountctrl.UpdatePassAccountById = (req,res)=>{
+accountctrl.updateAccount = (req,res)=>{
   const id_account = req.body.id_account
   const pass_account  = req.body.pass_account
   const pass_account_hash = bcrypt.hashSync(pass_account,5)
 
-  const accountlist = [pass_account_hash,id_account]
+  const accountlist = [pass_account_hash, id_account]
 
-  accountmd.UpdatePassAccountByIdAccount((err,results)=>{
+  accountmd.updateAccount((err,results)=>{
     if(err)
     {
       console.log("Error1: " + err)
@@ -176,17 +173,35 @@ accountctrl.UpdatePassAccountById = (req,res)=>{
       res.json({success: true, data: results}) 
     } 
   },accountlist)
-
 }
 
-accountctrl.UpdateUserByIdUser = (req,res)=>{
+accountctrl.deleteAccount = (req,res)=>{
+  const id_account = req.body.id_account
+
+  const accountlist = [id_account]
+
+  accountmd.deleteAccount((err,results)=>{
+    if(err)
+    {
+      console.log("Error1: " + err)
+    }
+    else
+    {
+      res.json({success: true, data: results}) 
+    } 
+  },accountlist)
+}
+
+accountctrl.updateUser = (req,res)=>{
   const phone_user = req.body.phone_user
   const birth_user = req.body.birth_user
   const sex_user = req.body.sex_user
   const name_user = req.body.name_user
   const id_user = req.body.id_user
-
   const userlist = [phone_user, birth_user, sex_user, name_user, id_user]
+
+  const ext = path.extname(req.file.image_user.originalname)
+  fs.renameSync("./user_rawdata/" + req.file.image_user.originalname, "./public/imguser/" + id_user + ext);
 
   accountmd.UpdateUserByIdUser((err,results)=>{
     if(err)
@@ -198,4 +213,34 @@ accountctrl.UpdateUserByIdUser = (req,res)=>{
       res.json({success: true, data: results}) 
     } 
   },userlist)
+}
+
+accountctrl.deleteUser = (req,res)=>{
+  const id_user = req.body.id_user
+
+  const userlist = [id_user]
+
+  accountmd.deleteUser((err,results)=>{
+    if(err)
+    {
+      console.log("Error1: " + err)
+    }
+    else
+    {
+      res.json({success: true, data: results}) 
+    } 
+  },userlist)
+}
+
+accountctrl.GetTypeUser = (req,res)=>{
+  accountmd.GetTypeUser((err,type_user)=>{
+    if(err)
+    {
+      res.json({success: false, data: err})
+    }
+    else
+    {
+      res.json({success: true, data: type_user})
+    }
+  },req.body.email)
 }

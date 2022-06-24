@@ -3,6 +3,21 @@ const router = express.Router()
 const accountctrl = require("../controllers/accountctrl")
 const path = require("path")
 const passport = require("passport")
+const multer = require("multer")
+const { isAdmin } = require("./authmiddleware")
+
+const fileStorageEngine = multer.diskStorage({
+  destination: (req,file,cb)=>{
+    console.log("in destination: " + JSON.stringify(file))
+    cb(null,"./user_rawdata")
+  },
+  filename: (req,file,cb)=>{
+    console.log("in filename" + JSON.stringify(file))
+    cb(null,file.originalname)
+  }
+})
+
+const upload = multer({storage: fileStorageEngine})
 
 router.post("/login",accountctrl.verifyAccount)
 
@@ -30,6 +45,13 @@ router.route("/islogin")
 
 router.post("/signin",accountctrl.insertAccountUser)
 
-router.put("/updatepassword",accountctrl.UpdatePassAccountById)
+router.post("/gettypeuser",accountctrl.GetTypeUser)
+
+router.put("/updateAccount",isAdmin,accountctrl.updateAccount)
+router.delete("/deleteAccount",isAdmin,accountctrl.deleteAccount)
+
+router.put("/updateUser",isAdmin,upload.single("image_user"),accountctrl.updateUser)
+router.delete("/deleteUser",isAdmin,accountctrl.deleteUser)
+
 
 module.exports = router

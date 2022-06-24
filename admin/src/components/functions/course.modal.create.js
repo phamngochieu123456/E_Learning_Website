@@ -13,10 +13,6 @@ export function CourseModalCreate() {
 
     const handleSubmit = async () =>
     {
-
-      console.log(data)
-      console.log(data.image)
-
       const payload = new FormData()
       payload.append("class",data.class)
       payload.append("image_class",data.image)
@@ -24,9 +20,19 @@ export function CourseModalCreate() {
       payload.append("description_class",data.description)
       payload.append("overview_class",data.overview)
       payload.append("price_class",data.price)
+
+      const typeuser = localStorage.getItem("type_user");
+      const typeuserjson = JSON.parse(typeuser)
+      payload.append("id_type_user",typeuserjson.id_type_user)
+
+      const user = localStorage.getItem("user");
+      const userjson = JSON.parse(user)
+      payload.append("id_user",userjson.id_user)
+
       const config = {
         method: 'post',
         url: 'http://localhost:5000/class/insertClass',
+        withCredentials: true,
         data: payload,
         headers: {'Content-Type': 'multipart/form-data'}
       }

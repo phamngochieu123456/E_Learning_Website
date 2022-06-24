@@ -8,7 +8,7 @@ const query = util.promisify(conn.query).bind(conn);
 accountmd.getAllAccounts = async (result) =>{
   try
   {
-    var results = await query("select * from account")
+    var results = await query("select * from account where active_account = 1")
     result(null,results)
   }
   catch(err)
@@ -20,7 +20,7 @@ accountmd.getAllAccounts = async (result) =>{
 accountmd.getAccountByEmail= async (result,Email) =>{
   try
   {
-    var results = await query("select * from account where name_account = \"" + Email+"\"")
+    var results = await query("select * from account where name_account = \"" + Email+"\" and active_account = 1")
     result(null,results[0])
   }
   catch(err)
@@ -32,7 +32,7 @@ accountmd.getAccountByEmail= async (result,Email) =>{
 accountmd.getAccountById= async (result,Id) =>{
   try
   {
-    var results = await query("select * from account where id_account = \"" + Id+"\"")
+    var results = await query("select * from account where id_account = \"" + Id+"\" and active_account = 1")
     result(null,results[0])
   }
   catch(err)
@@ -116,7 +116,7 @@ accountmd.getnewtoken = async (result,refreshtoken) => {
 accountmd.getUserByAccountId = async(result,Id) =>{
   try
   {
-    var users = await query("select * from user where id_account = \"" + Id+"\"")
+    var users = await query("select * from user where id_account = \"" + Id+"\" and active_user = 1")
     result(null,users[0])
   }
   catch(err)
@@ -171,7 +171,7 @@ accountmd.insertAccountUser = async (result,accountlist, userlist) => {
   }
 }
 
-accountmd.UpdatePassAccountByIdAccount = async (result,accountlist) => {
+accountmd.updateAccount = async (result,accountlist) => {
   try
   {
     var sql = "UPDATE account SET pass_account = ? WHERE id_account = ?"
@@ -184,7 +184,20 @@ accountmd.UpdatePassAccountByIdAccount = async (result,accountlist) => {
   }
 }
 
-accountmd.UpdateUserByIdUser = async (result,userlist) => {
+accountmd.deleteAccount = async (result,accountlist) => {
+  try
+  {
+    var sql = "UPDATE account SET active_account = 0 WHERE id_account = ?"
+    const results = await query(sql,accountlist)
+    result(null,results)
+  }
+  catch(err)
+  {
+    result(err,null)
+  }
+}
+
+accountmd.updateUser = async (result,userlist) => {
   try
   {
     var sql = "UPDATE user SET phone_user = ?, birth_user = ?, sex_user = ?, name_user = ? WHERE id_user = ?"
@@ -197,28 +210,78 @@ accountmd.UpdateUserByIdUser = async (result,userlist) => {
   }
 }
 
-// accountmd.getIdTypeUserByNTU = async(result,Id) =>{
-//   try
-//   {
-//     var type_users = await query("select * from type_user where id_type_user = \"" + Id+"\"")
-//     result(null,type_users)
-//   }
-//   catch(err)
-//   {
-//     console.log("Error: " + err)
-//     result(err,null)
-//   }
-// }
+accountmd.deleteUser = async (result,userlist) => {
+  try
+  {
+    var sql = "UPDATE user SET active_user = 0 WHERE id_user = ?"
+    const results = await query(sql,accountlist)
+    result(null,results)
+  }
+  catch(err)
+  {
+    result(err,null)
+  }
+}
 
-// accountmd.insertUser = async (result,userlist) =>{
-//   try
-//   {
-//     var sql = "INSERT INTO user (id_account, phone_user, birth_user, sex_user, id_type_user, name_user, id_user) VALUES ?"
-//     const results = await query(sql,[userlist])
-//     result(null,results)
-//   }
-//   catch(err)
-//   {
-//     result(err,null)
-//   }
-// }
+accountmd.GetTypeUser = async (result,email) => {
+  try
+  {
+    const sql = `SELECT type_user.name_type_user, type_user.id_type_user FROM (account INNER JOIN user ON account.id_account = user.id_account) INNER JOIN type_user 
+    ON user.id_type_user = type_user.id_type_user WHERE account.name_account = "` + email + `"`
+    var results = await query(sql)
+    result(null,results[0])   
+  }
+  catch(err)
+  {
+    console.log("Error: " + err)
+    result(err,null)
+  }
+}
+
+accountmd.IsTeacher = async (result,id_account) => {
+  try
+  {
+    const sql = `SELECT * FROM (account INNER JOIN user ON account.id_account = user.id_account) INNER JOIN type_user 
+    ON user.id_type_user = type_user.id_type_user WHERE account.id_account = "` + id_account + `"` + `and 
+    type_user.name_type_user = "TEACHER"`
+    var results = await query(sql)
+    
+    if(results.length>0)
+    {
+      result(null,results[0])
+    }
+    else
+    {
+      result("User type is not teacher",null)
+    }    
+  }
+  catch(err)
+  {
+    console.log("Error: " + err)
+    result(err,null)
+  }
+}
+
+accountmd.IsAdmin = async (result,id_account) => {
+  try
+  {
+    const sql = `SELECT * FROM (account INNER JOIN user ON account.id_account = user.id_account) INNER JOIN type_user 
+    ON user.id_type_user = type_user.id_type_user WHERE account.id_account = "` + id_account + `"` + `and 
+    type_user.name_type_user = "ADMIN"`
+    var results = await query(sql)
+    
+    if(results.length>0)
+    {
+      result(null,results[0])
+    }
+    else
+    {
+      result("User type is not teacher",null)
+    }    
+  }
+  catch(err)
+  {
+    console.log("Error: " + err)
+    result(err,null)
+  }
+}
