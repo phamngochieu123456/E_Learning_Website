@@ -16,13 +16,13 @@ const paymentroute = require("./routes/paymentroute")
 const app = express()
 
 app.use((req, res, next) => {
-  const allowedOrigins = ['http://localhost:3000', 'http://localhost:8000'];
+  const allowedOrigins = ['http://localhost:3000', 'http://localhost:8000']
   const origin = req.headers.origin;
   if (allowedOrigins.includes(origin)) {
-       res.setHeader('Access-Control-Allow-Origin', origin);
+    res.setHeader('Access-Control-Allow-Origin', origin);
   }
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PATCH, PUT, DELETE, OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Origin, Content-Type, X-Auth-Token');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PATCH, PUT, DELETE, OPTIONS')
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Origin, Content-Type, X-Auth-Token, X-Requested-With, Accept')
   res.header('Access-Control-Allow-Credentials', true);
   next()
 })

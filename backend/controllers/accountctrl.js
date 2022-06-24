@@ -2,12 +2,14 @@ var accountctrl = module.exports
 const accountmd = require("../models/accountmd")
 const bcrypt = require("bcrypt")
 const uuid = require("uuid")
+const path = require("path")
+const fs = require("fs")
 
 accountctrl.getAllAccounts = (req,res)=>{
   accountmd.getAllAccounts((err,accounts)=>{
     if(err)
     {
-      res.json({success: false, data: err})
+      res.json({success: false, data: err.message})
     }
     else
     {
@@ -22,7 +24,7 @@ accountctrl.verifyAccount = (req,res)=>{
     accountmd.verifyAccount((err,account)=>{
       if(err)
       {
-        res.json({success:false, data:err})
+        res.json({success:false, data:err.message})
       }
       else
       {
@@ -42,7 +44,7 @@ accountctrl.getnewtoken = (req,res)=>{
     accountmd.getnewtoken((err,newaccesstoken)=>{
       if(err)
       {
-        res.json({success:false, data:err})
+        res.json({success:false, data:err.message})
       }
       else
       {
@@ -62,7 +64,7 @@ accountctrl.getUserByAccountId = (req,res)=>{
     accountmd.getUserByAccountId((err,User)=>{
       if(err)
       {
-        res.json({success:false, data:err})
+        res.json({success:false, data:err.message})
       }
       else
       {
@@ -82,7 +84,7 @@ accountctrl.getUserByAccountId1=(req,res)=>{
     accountmd.getUserByAccountId((err,User)=>{
       if(err)
       {
-        res.json({success:false,data:err})
+        res.json({success:false,data:err.message})
       }
       else
       {
@@ -99,7 +101,6 @@ accountctrl.getUserByAccountId1=(req,res)=>{
 accountctrl.getUserHome = (req,res)=>{
   try
   {
-    console.log(JSON.stringify(req.session))
     const account = req.user || req.session.jwt.user
     if(account)
     {
@@ -122,7 +123,7 @@ accountctrl.getUserHome = (req,res)=>{
   catch(err)
   {
     res.render("userhome",{title: "Home", User: {name_user: "Client"}})
-    console.log("Error: " + err)
+    console.log("Error: " + err.message)
   }
 }
 
@@ -146,7 +147,7 @@ accountctrl.insertAccountUser = (req,res)=>{
   accountmd.insertAccountUser((err,results)=>{
     if(err)
     {
-      console.log("Error1: " + err)
+      console.log("Error1: " + err.message)
     }
     else
     {
@@ -157,22 +158,29 @@ accountctrl.insertAccountUser = (req,res)=>{
 }
 
 accountctrl.updateAccount = (req,res)=>{
-  const id_account = req.body.id_account
-  const pass_account  = req.body.pass_account
-  const pass_account_hash = bcrypt.hashSync(pass_account,5)
-
-  const accountlist = [pass_account_hash, id_account]
-
-  accountmd.updateAccount((err,results)=>{
-    if(err)
-    {
-      console.log("Error1: " + err)
-    }
-    else
-    {
-      res.json({success: true, data: results}) 
-    } 
-  },accountlist)
+  const jsonstr = await accountmd.isUser(req.user.id_account,req.body.id_user) 
+  const json = JSON.parse(jsonstr)
+  if(json.success)
+  {
+    const pass_account  = req.body.pass_account
+    const pass_account_hash = bcrypt.hashSync(pass_account,5)
+    const accountlist = [pass_account_hash, id_account]
+    accountmd.updateAccount((err,results)=>{
+      if(err)
+      {
+        console.log("Error1: " + err.message)
+      }
+      else
+      {
+        res.json({success: true, data: results}) 
+      } 
+    },accountlist)
+  }
+  else
+  {
+    res.status(401).json({success:false, data: 'You are not authorized'})
+  }
+  
 }
 
 accountctrl.deleteAccount = (req,res)=>{
@@ -183,7 +191,7 @@ accountctrl.deleteAccount = (req,res)=>{
   accountmd.deleteAccount((err,results)=>{
     if(err)
     {
-      console.log("Error1: " + err)
+      console.log("Error1: " + err.message)
     }
     else
     {
@@ -192,27 +200,43 @@ accountctrl.deleteAccount = (req,res)=>{
   },accountlist)
 }
 
-accountctrl.updateUser = (req,res)=>{
-  const phone_user = req.body.phone_user
-  const birth_user = req.body.birth_user
-  const sex_user = req.body.sex_user
-  const name_user = req.body.name_user
-  const id_user = req.body.id_user
-  const userlist = [phone_user, birth_user, sex_user, name_user, id_user]
+accountctrl.updateUser = async (req,res)=>{
+  const jsonstr = await accountmd.isUser(req.user.id_account,req.body.id_user) 
+  const json = JSON.parse(jsonstr)
+  if(json.success)
+  {
+    const phone_user = req.body.phone_user
+    const birth_user = req.body.birth_user
+    const sex_user = req.body.sex_user
+    const name_user = req.body.name_user
+    const id_user = req.body.id_user
+    var avatar_user = ""
 
-  const ext = path.extname(req.file.image_user.originalname)
-  fs.renameSync("./user_rawdata/" + req.file.image_user.originalname, "./public/imguser/" + id_user + ext);
-
-  accountmd.UpdateUserByIdUser((err,results)=>{
-    if(err)
+    if(req.file)
     {
-      console.log("Error1: " + err)
+      const ext = path.extname(req.file.originalname)
+      fs.renameSync("./user_rawdata/" + req.file.originalname, "./public/imguser/" + id_user + ext)
+      avatar_user = "/imguser/" + id_user + ext
     }
-    else
-    {
-      res.json({success: true, data: results}) 
-    } 
-  },userlist)
+    
+    const userlist = [phone_user, avatar_user, birth_user, sex_user, name_user, id_user]
+
+    accountmd.updateUser((err,results)=>{
+      if(err)
+      {
+        console.log("Error1: " + err.message)
+      }
+      else
+      {
+        res.json({success: true, data: results}) 
+      } 
+    },userlist)
+  }
+  else
+  {
+    fs.unlinkSync("./user_rawdata/" + req.file.image_user.originalname)
+    res.status(401).json({success:false, data: 'You are not authorized'})
+  }
 }
 
 accountctrl.deleteUser = (req,res)=>{
@@ -223,7 +247,7 @@ accountctrl.deleteUser = (req,res)=>{
   accountmd.deleteUser((err,results)=>{
     if(err)
     {
-      console.log("Error1: " + err)
+      console.log("Error1: " + err.message)
     }
     else
     {

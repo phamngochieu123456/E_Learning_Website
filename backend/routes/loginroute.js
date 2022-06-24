@@ -47,10 +47,10 @@ router.post("/signin",accountctrl.insertAccountUser)
 
 router.post("/gettypeuser",accountctrl.GetTypeUser)
 
-router.put("/updateAccount",isAdmin,accountctrl.updateAccount)
+router.put("/updateAccount",accountctrl.updateAccount)
 router.delete("/deleteAccount",isAdmin,accountctrl.deleteAccount)
 
-router.put("/updateUser",isAdmin,upload.single("image_user"),accountctrl.updateUser)
+router.put("/updateUser",upload.single("image_user"),accountctrl.updateUser)
 router.delete("/deleteUser",isAdmin,accountctrl.deleteUser)
 
 

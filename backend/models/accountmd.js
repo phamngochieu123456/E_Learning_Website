@@ -200,7 +200,7 @@ accountmd.deleteAccount = async (result,accountlist) => {
 accountmd.updateUser = async (result,userlist) => {
   try
   {
-    var sql = "UPDATE user SET phone_user = ?, birth_user = ?, sex_user = ?, name_user = ? WHERE id_user = ?"
+    var sql = "UPDATE user SET phone_user = ?, avatar_user = ?, birth_user = ?, sex_user = ?, name_user = ? WHERE id_user = ?"
     const results = await query(sql,userlist)
     result(null,results)
   }
@@ -276,12 +276,39 @@ accountmd.IsAdmin = async (result,id_account) => {
     }
     else
     {
-      result("User type is not teacher",null)
+      result("User type is not admin",null)
     }    
   }
   catch(err)
   {
     console.log("Error: " + err)
     result(err,null)
+  }
+}
+
+accountmd.isUser = async (id_account,id_user) => {
+  try
+  {
+    const sql = `SELECT * FROM user WHERE id_account = "` + id_account + `"` + ` and  id_user = "` + id_user + `"`
+    var results = await query(sql)
+    
+    if(results.length>0)
+    {
+      const json = {success: true, data: results[0]}
+      const jsonstr = JSON.stringify(json)
+      return jsonstr
+    }
+    else
+    {
+      const json = {success: false, data: "User is not exist!!!"}
+      const jsonstr = JSON.stringify(json)
+      return jsonstr
+    }    
+  }
+  catch(err)
+  {
+    const json = {success: false, data: err.message}
+    const jsonstr = JSON.stringify(json)
+    return jsonstr
   }
 }

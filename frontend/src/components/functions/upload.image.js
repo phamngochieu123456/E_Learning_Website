@@ -31,7 +31,7 @@ export const ImageUpload = (props) => {
 
     return (
         <div className="mb-3">
-            <input name="image" type='file' onChange={onSelectFile} accept="image/*"/>
+            <input name="image_user" type='file' onChange={onSelectFile} accept="image/*"/>
             <br />
             <br />
             {selectedFile &&  <img src={preview} style={{width:170,height:170}}/> }
