@@ -1,6 +1,6 @@
 var classmd = module.exports
 const conn = require("../config/database")
-const util = require("util");
+const util = require("util")
 const query = util.promisify(conn.query).bind(conn);
 
 classmd.getAllClass = async (result) =>{

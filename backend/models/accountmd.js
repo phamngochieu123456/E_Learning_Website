@@ -286,6 +286,35 @@ accountmd.isAdmin = async (result,id_account) => {
   }
 }
 
+accountmd.isAdmin_Data = async (id_account) => {
+  try
+  {
+    const sql = `SELECT * FROM (account INNER JOIN user ON account.id_account = user.id_account) INNER JOIN type_user 
+    ON user.id_type_user = type_user.id_type_user WHERE account.id_account = "` + id_account + `"` + `and 
+    type_user.name_type_user = "ADMIN"`
+    var results = await query(sql)
+    
+    if(results.length>0)
+    {
+      const json = {success: true, data: results[0]}
+      const jsonstr = JSON.stringify(json)
+      return jsonstr
+    }
+    else
+    {
+      const json = {success: false, data: "User type is not admin"}
+      const jsonstr = JSON.stringify(json)
+      return jsonstr
+    }    
+  }
+  catch(err)
+  {
+    const json = {success: false, data: err.message}
+    const jsonstr = JSON.stringify(json)
+    return jsonstr
+  }
+}
+
 accountmd.isUser = async (id_account,id_user) => {
   try
   {

@@ -160,7 +160,9 @@ accountctrl.insertAccountUser = (req,res)=>{
 accountctrl.updateAccount = (req,res)=>{
   const jsonstr = await accountmd.isUser(req.user.id_account,req.body.id_user) 
   const json = JSON.parse(jsonstr)
-  if(json.success)
+  const jsonstradmin = await accountmd.isAdmin_Data(req.user.id_account)
+  const jsonadmin  = JSON.parse(jsonstradmin)
+  if(json.success || jsonadmin.success)
   {
     const pass_account  = req.body.pass_account
     const pass_account_hash = bcrypt.hashSync(pass_account,5)
@@ -203,7 +205,9 @@ accountctrl.deleteAccount = (req,res)=>{
 accountctrl.updateUser = async (req,res)=>{
   const jsonstr = await accountmd.isUser(req.user.id_account,req.body.id_user) 
   const json = JSON.parse(jsonstr)
-  if(json.success)
+  const jsonstradmin = await accountmd.isAdmin_Data(req.user.id_account)
+    const jsonadmin  = JSON.parse(jsonstradmin)
+  if(json.success || jsonadmin.successs)
   {
     const phone_user = req.body.phone_user
     const birth_user = req.body.birth_user

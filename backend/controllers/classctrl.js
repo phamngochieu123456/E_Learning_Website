@@ -316,9 +316,11 @@ classctrl.updateClass = async (req,res)=>{
     const overview_class = req.body.overview_class
     var img_path_class = ""
     
-    const jsonstrclass = await classmd.isTeacherClass(id_user,id_class)
-    const jsonclass = JSON.parse(jsonstrclass)
-    if(jsonclass.success)
+    const jsonstrclassteacher = await classmd.isTeacherClass(id_user,id_class)
+    const jsonclassteacher = JSON.parse(jsonstrclassteacher)
+    const jsonstradmin = await accountmd.isAdmin_Data(req.user.id_account)
+    const jsonadmin  = JSON.parse(jsonstradmin)
+    if(jsonclassteacher.success || jsonadmin.success)
     {
       if(req.file)
       {
@@ -355,10 +357,12 @@ classctrl.deleteClass = async (req,res)=>{
   const id_user = req.body.id_user
   const id_class = req.body.id_class
   const listclasses = [id_class]
-  const jsonstrclass = await classmd.isTeacherClass(id_user,id_class)
-  const jsonclass = JSON.parse(jsonstrclass)
+  const jsonstrclassteacher = await classmd.isTeacherClass(id_user,id_class)
+  const jsonclassteacher = JSON.parse(jsonstrclassteacher)
+  const jsonstradmin = await accountmd.isAdmin_Data(req.user.id_account)
+  const jsonadmin  = JSON.parse(jsonstradmin)
 
-  if(jsonclass.success)
+  if(jsonclassteacher.success || jsonadmin.success)
   {
     classmd.deleteClass((err,results)=>{
       if(err)
