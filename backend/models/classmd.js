@@ -117,6 +117,25 @@ classmd.getDocumentById = async (result,id_document) =>{
   }
 }
 
+classmd.getClassTeacher_Data = async (id_class) => {
+  try
+  {
+    var sql = `SELECT user.id_user FROM class INNER JOIN list_classes ON class.id_class = list_classes.id_class INNER JOIN 
+    user ON list_classes.id_user = user.id_user INNER JOIN type_user ON user.id_type_user = type_user.id_type_user 
+    WHERE list_classes.id_class = "` + id_class `" AND type_user.name_type_user = "TEACHER"`
+    const results = await query(sql)
+    const json = {success:true, data: results[0]}
+    const jsonstr = JSON.stringify(json)
+    return jsonstr
+  }
+  catch(err)
+  {
+    const json = {success:false, data: err.message}
+    const jsonstr = JSON.stringify(json)
+    return jsonstr
+  }
+}
+
 classmd.isExistUserWithClass = async (result, id_user, id_class) =>{
   try
   {
