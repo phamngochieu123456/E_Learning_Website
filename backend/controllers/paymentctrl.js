@@ -4,6 +4,7 @@ const classmd = require("../models/classmd")
 const paypal = require('paypal-rest-sdk')
 const payoutsSdk = require('@paypal/payouts-sdk')
 const payPalClient = require('./payPalClient')
+const moment = require("moment")
 
 paypal.configure({
   'mode': 'sandbox',
@@ -13,10 +14,17 @@ paypal.configure({
 
 var total = 0
 var id_user = ""
+var id_class = ""
+var id_type_user = ""
 
 paymentctrl.pay = async (req,res)=>{
   const jsonstr = await classmd.getClassById_Data(req.body.id_class);
   id_user = req.body.id_user
+  id_class = req.body.id_class
+  id_type_user = req.body.id_type_user
+
+  console.log(id_user, id_class, id_type_user)
+
   const json = JSON.parse(jsonstr)
   if(json.success)
   {
@@ -86,10 +94,10 @@ paymentctrl.successPay = async (req,res)=>{
     }]
   };
 
-  paypal.payment.execute(paymentId, execute_payment_json, function (error, payment) {
+  paypal.payment.execute(paymentId, execute_payment_json, async function (error, payment) {
     if (error) 
     {
-      console.log(id_user)
+      id_user = id_class = id_type_user = ""
       res.json({success: false, data: error.message})
     } 
     else 
@@ -98,14 +106,16 @@ paymentctrl.successPay = async (req,res)=>{
         console.log("in module")
         await createPayoutFailure(true)
       })()
-
-      console.log(id_user)
+      const time_class = moment().format("YYYY-MM-DD HH:mm:ss")
+      const listclasseslist = [[id_user,id_class,id_type_user,time_class]]
+      const jsonstr = await classmd.insertLissClasses_Data(listclasseslist)
+      console.log(jsonstr)
       res.redirect("http://localhost:3000/payment-success")
     }
   });
 }
 
-function buildRequestBody(includeValidationFailure) 
+async function buildRequestBody(includeValidationFailure) 
 {
   let senderBatchId = "Test_sdk_" + Math.random().toString(36).substring(7);
   return {

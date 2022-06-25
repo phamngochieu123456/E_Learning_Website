@@ -7,10 +7,12 @@ export const GetCourseDetailByIdClass = () =>
     const { id_class } = useParams();
     const user = localStorage.getItem("user");
     let id_user = ""
+    let id_type_user = ""
     if(user!=null)
     {
         const accountjson = JSON.parse(user)
         id_user = accountjson.id_user
+        id_type_user = accountjson.id_type_user
     }
 
     const [details,setDetails] = useState([])
@@ -20,7 +22,7 @@ export const GetCourseDetailByIdClass = () =>
             method: 'post',
             url: 'http://localhost:5000/payment/pay',
             withCredentials: true,
-            data: {id_class: id_class}
+            data: {id_class: id_class,id_user: id_user, id_type_user: id_type_user}
         }
         const res = await axios(config)
         if(res.data.success)

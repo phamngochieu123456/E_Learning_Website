@@ -129,16 +129,20 @@ classmd.isExistUserWithClass = async (result, id_user, id_class) =>{
   }
 }
 
-classmd.insertLissClasses = async (result, listclasseslist) =>{
+classmd.insertLissClasses_Data = async (listclasseslist) =>{
   try
   {
     var sql = "INSERT INTO list_classes (id_user, id_class, id_type_user, time_class) VALUES ?"
     const results = await query(sql,[listclasseslist])
-    result(null,results)
+    const json = {success: true, data: results.affectedRows}
+    const jsonstr = JSON.stringify(json)
+    return jsonstr
   }
   catch(err)
   {
-    result(err,null)
+    const json = {success: false, data: err.message}
+    const jsonstr = JSON.stringify(json)
+    return jsonstr
   }
 }
 
@@ -211,19 +215,6 @@ classmd.insertDocument = async (result,documentllist) => {
   {
     var sql = "INSERT INTO document (id_document, name_document, id_sub_topic, type_document, path_document) VALUES ?"
     const results = await query(sql,[documentllist])
-    result(null,results)
-  }
-  catch(err)
-  {
-    result(err,null)
-  }
-}
-
-classmd.insertLissClasses = async (result,lclist) =>{
-  try
-  {
-    var sql = "INSERT INTO list_classes (id_user, id_class, id_type_user, time_class) VALUES ?"
-    const results = await query(sql,[lclist])
     result(null,results)
   }
   catch(err)
