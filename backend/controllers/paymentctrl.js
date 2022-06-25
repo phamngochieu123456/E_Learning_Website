@@ -12,9 +12,11 @@ paypal.configure({
 });
 
 var total = 0
+var id_user = ""
 
 paymentctrl.pay = async (req,res)=>{
-  const jsonstr = await classmd.getClassById_Data(req.body.id_class)
+  const jsonstr = await classmd.getClassById_Data(req.body.id_class);
+  id_user = req.body.id_user
   const json = JSON.parse(jsonstr)
   if(json.success)
   {
@@ -70,7 +72,7 @@ paymentctrl.pay = async (req,res)=>{
   }
 }
 
-paymentctrl.success = async (req,res)=>{
+paymentctrl.successPay = async (req,res)=>{
   const payerId = req.query.PayerID;
   const paymentId = req.query.paymentId;
 
@@ -87,6 +89,7 @@ paymentctrl.success = async (req,res)=>{
   paypal.payment.execute(paymentId, execute_payment_json, function (error, payment) {
     if (error) 
     {
+      console.log(id_user)
       res.json({success: false, data: error.message})
     } 
     else 
@@ -95,6 +98,8 @@ paymentctrl.success = async (req,res)=>{
         console.log("in module")
         await createPayoutFailure(true)
       })()
+
+      console.log(id_user)
       res.redirect("http://localhost:3000/payment-success")
     }
   });
