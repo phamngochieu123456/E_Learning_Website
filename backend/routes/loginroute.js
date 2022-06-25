@@ -50,8 +50,10 @@ router.post("/gettypeuser",accountctrl.GetTypeUser)
 router.put("/updateAccount",accountctrl.updateAccount)
 router.delete("/deleteAccount",isAdmin,accountctrl.deleteAccount)
 
+router.get("/getAllUsers",accountctrl.getAllUsers)
 router.put("/updateUser",upload.single("image_user"),accountctrl.updateUser)
 router.delete("/deleteUser",isAdmin,accountctrl.deleteUser)
 
+router.get("/getAllAccounts",accountctrl.getAllAccounts)
 
 module.exports = router

@@ -3,11 +3,11 @@ import { useState } from "react";
 import { AiFillDelete } from "react-icons/ai";
 import axios from "axios";
 
-export function AccountModalDelete(props) {
+export function UserModalDelete(props) {
     const [show, setShow] = useState(false);
   
     const data={
-      id_account:props.data.id_account,
+      id_user:props.data.id_user,
     };
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -15,16 +15,22 @@ export function AccountModalDelete(props) {
     const handleClick = async (event) => {
         event.preventDefault()
         const payload = {
-        id_account:data.id_account,
+            id_user:data.id_user,
         }
         const config = {
         method: 'delete',
-        url: 'http://localhost:5000/user/deleteAccount',
+        url: 'http://localhost:5000/user/deleteUser',
         withCredentials: true,
         data: payload,
         }
         const res = await axios(config)
-        window.location.href = window.location.href
+        if (res.data.success)
+        {
+            window.location.href = window.location.href
+        }
+        else{
+            alert("Bạn không có quyền để xóa người dùng")
+        }
     
     }
     return (
@@ -34,7 +40,7 @@ export function AccountModalDelete(props) {
         </Button>
         <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title>Delete Account</Modal.Title>
+            <Modal.Title>Delete User</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <Form>
@@ -42,7 +48,7 @@ export function AccountModalDelete(props) {
                 <Form.Control
                   type="textarea"
                   disabled
-                  value="Bạn có chắc chắn muốn xóa tài khoản ?"
+                  value="Bạn có chắc chắn muốn xóa người dùng ?"
                 />
               </Form.Group>
             </Form>

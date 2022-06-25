@@ -200,12 +200,20 @@ accountctrl.deleteAccount = (req,res)=>{
   },accountlist)
 }
 
+accountctrl.getAllUsers = async (req,res)=>{
+  const jsonstr = await accountmd.getAllUsers()
+  const json = JSON.parse(jsonstr)
+  res.json(json)
+}
+
 accountctrl.updateUser = async (req,res)=>{
+
   const jsonstr = await accountmd.isUser(req.user.id_account,req.body.id_user) 
   const json = JSON.parse(jsonstr)
   const jsonstradmin = await accountmd.isAdmin_Data(req.user.id_account)
   const jsonadmin  = JSON.parse(jsonstradmin)
-  if(json.success || jsonadmin.successs)
+
+  if(json.success || jsonadmin.success)
   {
     const phone_user = req.body.phone_user
     const birth_user = req.body.birth_user
@@ -236,7 +244,10 @@ accountctrl.updateUser = async (req,res)=>{
   }
   else
   {
-    fs.unlinkSync("./user_rawdata/" + req.file.image_user.originalname)
+    if(req.file)
+    {
+      fs.unlinkSync("./user_rawdata/" + req.file.originalname)
+    }
     res.status(401).json({success:false, data: 'You are not authorized'})
   }
 }

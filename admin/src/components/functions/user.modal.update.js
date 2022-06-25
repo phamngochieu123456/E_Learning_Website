@@ -3,16 +3,16 @@ import { useState } from "react";
 import { BiEdit } from "react-icons/bi";
 import axios from "axios";
 
-export function CourseModal(props) {
+export function UserModal(props) {
     const [show, setShow] = useState(false);
   
     const data={
-      id_class:props.data.id_class,
-      data:'',
-      title:props.data.name_class,
-      description:props.data.description_class,
-      overview:props.data.overview_class,
-      price:props.data.price_class,
+      name_user: props.data.name_user,
+      image_user: '',
+      phone_user: props.data.phone_user,
+      birth_user: props.data.birth_user.substr(0,10),
+      sex_user: props.data.sex_user,
+      id_user: props.data.id_user,
     };
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -20,24 +20,16 @@ export function CourseModal(props) {
     const handleClick = async (event) => {
         event.preventDefault()
         const payload = new FormData()
-        payload.append("id_class",data.id_class)
-        payload.append("image_class",data.image)
-        payload.append("name_class",data.title)
-        payload.append("description_class",data.description)
-        payload.append("overview_class",data.overview)
-        payload.append("price_class",data.price)
-
-        const typeuser = localStorage.getItem("type_user");
-        const typeuserjson = JSON.parse(typeuser)
-        payload.append("id_type_user",typeuserjson.id_type_user)
-
-        const user = localStorage.getItem("user");
-        const userjson = JSON.parse(user)
-        payload.append("id_user",userjson.id_user)
+        payload.append("name_user",data.name_user)
+        payload.append("image_user",data.image_user)
+        payload.append("phone_user",data.phone_user)
+        payload.append("birth_user",data.birth_user)
+        payload.append("sex_user",data.sex_user)
+        payload.append("id_user",data.id_user)
 
         const config = {
           method: 'put',
-          url: 'http://localhost:5000/class/updateClass',
+          url: 'http://localhost:5000/user/updateUser',
           withCredentials: true,
           data: payload,
           headers: {'Content-Type': 'multipart/form-data'}
@@ -46,7 +38,7 @@ export function CourseModal(props) {
         if (res.data.success){
           window.location.href = window.location.href
         }
-        else alert("Bạn không có quyền để cập nhập khóa học")
+        else alert("Bạn không có quyền để cập nhập thông tin người dùng")
     }
     return (
       <>
@@ -60,41 +52,51 @@ export function CourseModal(props) {
           <Modal.Body>
             <Form validated>
               <Form.Group className="mb-3">
-                <Form.Label>Title</Form.Label>
+                <Form.Label>Name</Form.Label>
                 <Form.Control
                   type="text"
                   required
-                  defaultValue={props.data.name_class}
-                  onChange={e => {data.title = e.target.value} }
+                  defaultValue={props.data.name_user}
+                  onChange={e => {data.name_user = e.target.value} }
                 />
               </Form.Group>
               <Form.Group
                 className="mb-3"
               >
-                <Form.Label>Description</Form.Label>
-                <Form.Control as="textarea" rows={3} defaultValue={props.data.description_class} required 
-                    onChange={e => {data.description = e.target.value} }
+                <Form.Label>Phone</Form.Label>
+                <Form.Control type="tel" defaultValue={props.data.phone_user} required 
+                    onChange={e => {data.phone_user = e.target.value} }
                 />
               </Form.Group>
               <Form.Group
                 className="mb-3"
               >
-                <Form.Label>Overview</Form.Label>
+                <Form.Label>Birth</Form.Label>
                 <Form.Control 
-                    as="textarea" 
+                    type="date" 
                     required
-                    rows={4} 
-                    defaultValue={props.data.overview_class}
-                    onChange={e => {data.overview = e.target.value} }
+                    defaultValue={props.data.birth_user}
+                    onChange={e => {data.birth_user = e.target.value} }
                     />
               </Form.Group>
               <Form.Group className="mb-3">
-                <Form.Label>Price</Form.Label>
-                <Form.Control
-                  type="text"
-                  required
-                  defaultValue={props.data.price_class}
-                  onChange={e => {data.price = e.target.value} }
+                <Form.Label>Sex</Form.Label>
+                <br />
+                <Form.Check
+                    inline
+                    label="Male"
+                    name="sex_user"
+                    type="radio"
+                    defaultChecked={props.data.sex_user ? '1' : ''}
+                    onChange={e => {data.sex_user = e.target.value} }
+                />
+                <Form.Check
+                    inline
+                    label="Female"
+                    name="sex_user"
+                    type="radio"
+                    defaultChecked={!props.data.sex_user ? '0' : ''}
+                    onChange={e => {data.sex_user = e.target.value} }
                 />
               </Form.Group>
               <Form.Group className="mb-3">
@@ -104,7 +106,7 @@ export function CourseModal(props) {
                   required
                   accept="image/*"
                   value={data.image}
-                  onChange={e => {data.image = e.target.files[0]} }
+                  onChange={e => {data.image_user = e.target.files[0]} }
                 />
               </Form.Group>
             </Form>

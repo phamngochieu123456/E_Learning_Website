@@ -37,7 +37,10 @@ export function CourseModalCreate() {
         headers: {'Content-Type': 'multipart/form-data'}
       }
       const res = await axios(config)
-      console.log(JSON.stringify(res))
+      if (res.data.success){
+        window.location.href = window.location.href
+      }
+      else alert("Bạn không có quyền để tạo khóa học")
     }
     return (
       <>

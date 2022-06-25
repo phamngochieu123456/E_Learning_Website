@@ -23,12 +23,6 @@ export default class Courses extends Component {
                 sortable: true
             },
             {
-                key: "active_class",
-                text: "State",
-                className: "active_class",
-                sortable: true
-            },
-            {
                 key: "action",
                 text: "Action",
                 className: "action",

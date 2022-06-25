@@ -10,6 +10,7 @@ import Dashboard from './components/routes/dashboard';
 import Accounts from './components/routes/accounts';
 import Course from './components/routes/course.route';
 import Settings from './components/routes/setting';
+import User from './components/routes/user.route';
 
 function App() {
   return (
@@ -23,7 +24,7 @@ function App() {
             <Route path='/admin/dashboard' element={<Dashboard />}></Route>
             <Route path='/admin/accounts' element={<Accounts />}></Route>
             <Route path='/admin/courses' element={<Course />}></Route>
-            <Route path='/admin/users' element={<Errorpages />}></Route>
+            <Route path='/admin/users' element={<User />}></Route>
             <Route path='/admin/faqs' element={<Errorpages />}></Route>
             <Route path='/admin/settings' element={<div className='auth-wrapper'><Settings /></div>}></Route>
             <Route path='*' element={<Errorpages />}></Route>

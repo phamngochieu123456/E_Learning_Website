@@ -197,6 +197,24 @@ accountmd.deleteAccount = async (result,accountlist) => {
   }
 }
 
+accountmd.getAllUsers = async ()=>{
+  try
+  {
+    var sql = "SELECT * FROM user WHERE active_user = 1"
+    const results = await query(sql)
+    const json = {success: true, data: results}
+    const jsonstr = JSON.stringify(json)
+    return jsonstr
+  }
+  catch(err)
+  {
+    const json = {success: false, data: err.message}
+    const jsonstr = JSON.stringify(json)
+    return jsonstr
+  }
+  
+}
+
 accountmd.updateUser = async (result,userlist) => {
   try
   {
@@ -214,7 +232,7 @@ accountmd.deleteUser = async (result,userlist) => {
   try
   {
     var sql = "UPDATE user SET active_user = 0 WHERE id_user = ?"
-    const results = await query(sql,accountlist)
+    const results = await query(sql,userlist)
     result(null,results)
   }
   catch(err)

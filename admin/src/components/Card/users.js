@@ -1,9 +1,9 @@
 import React, { Component, Fragment } from 'react';
 import ReactDatatable from '@ashvin27/react-datatable';
-import { AccountModal } from '../functions/account.modal.update';
-import { AccountModalDelete } from '../functions/account.modal.delete';
+import { UserModal } from '../functions/user.modal.update';
+import { UserModalDelete } from '../functions/user.modal.delete';
 
-export default class Accounts extends Component {
+export default class Users extends Component {
     constructor(props) {
         super(props);
         this.columns = [
@@ -15,17 +15,41 @@ export default class Accounts extends Component {
                 sortable: true,
             },
             {
-                key: "name_account",
-                text: "Name",
-                className: "name_account",
+                key: "phone_user",
+                text: "Phone",
+                className: "phone_user",
                 align: "left",
                 sortable: true
             },
             {
-                key: "pass_account",
-                text: "Pass",
-                className: "pass_account",
+                key: "birth_user",
+                text: "Birth",
+                className: "birth_user",
                 align: "left",
+                sortable: true
+            },
+            {
+                key: "sex_user",
+                text: "Sex",
+                className: "sex_user",
+                sortable: true
+            },
+            {
+                key: "id_type_user",
+                text: "Type",
+                className: "id_type_user",
+                sortable: true
+            },
+            {
+                key: "name_user",
+                text: "Name",
+                className: "name_user",
+                sortable: true
+            },
+            {
+                key: "id_user",
+                text: "ID_User",
+                className: "id_user",
                 sortable: true
             },
             {
@@ -38,8 +62,8 @@ export default class Accounts extends Component {
                 cell: record => { 
                     return (
                         <Fragment>
-                            <AccountModal data={record}/>
-                            <AccountModalDelete data={record} />
+                            <UserModal data={record}/>
+                            <UserModalDelete data={record} />
                         </Fragment>
                     );
                 }
@@ -53,7 +77,9 @@ export default class Accounts extends Component {
                 extra: false,
             }
         }
-        
+        for (var i = 0; i < props.data.length; i++) {
+            props.data[i].birth_user = (props.data[i].birth_user).substr(0,10)
+        }
         this.state = {
             records: props.data
         }

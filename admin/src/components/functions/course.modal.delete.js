@@ -26,8 +26,10 @@ export function CourseModalDelete(props) {
         data: payload,
       }
       const res = await axios(config)
-      console.log(JSON.stringify(res))
-      window.location.href = window.location.href
+      if (res.data.success){
+        window.location.href = window.location.href
+      }
+      else alert("Bạn không có quyền để xóa khóa học")
     }
     return (
       <>
@@ -60,14 +62,6 @@ export function CourseModalDelete(props) {
                   type="text"
                   defaultValue={props.data.price_class}
                   disabled
-                />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Label>Current State</Form.Label>
-                <Form.Check 
-                    type="switch"
-                    defaultChecked={props.data.active_class}
-                    disabled
                 />
               </Form.Group>
             </Form>
