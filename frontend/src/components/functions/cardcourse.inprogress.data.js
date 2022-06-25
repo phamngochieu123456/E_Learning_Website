@@ -8,10 +8,17 @@ export const CardCourseIPData = () =>
     const [classes,setClasses] = useState([])
 
     useEffect(()=>{
+        const user = localStorage.getItem("user");
+        const userjson = JSON.parse(user)
+
+        const payload = {
+            id_user:userjson.id_user
+        }
         const config = {
-            method: 'get',
-            url: 'http://localhost:5000/class/getallclass',
-            withCredentials: true
+            method: 'post',
+            url: 'http://localhost:5000/class/getClassByIdUser',
+            withCredentials: true,
+            data: payload,
         }
         axios(config).then((res)=>{
             setClasses(res.data.data)
