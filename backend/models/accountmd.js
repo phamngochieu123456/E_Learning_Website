@@ -44,7 +44,7 @@ accountmd.getAccountById= async (result,Id) =>{
 accountmd.verifyAccount = async (result,username,password) => {
   try
   {
-    var results = await query("select * from account where name_account = \"" + username+"\"")
+    var results = await query("select * from account where name_account = \"" + username+"\"" + "and active_account = 1")
     if(results.length>0)
     {
       const res = bcrypt.compareSync(password,results[0].pass_account)
@@ -63,13 +63,13 @@ accountmd.verifyAccount = async (result,username,password) => {
     }
     else
     {
-      result("Sai email",null)
+      result("Sai email hoac tai khoan khong ton tai",null)
     }
   }
   catch(err)
   {
-    console.log("err: " + err)
-    result(err,null)
+    console.log("err: " + err.message)
+    result(err.message,null)
   }
 }
 

@@ -37,6 +37,7 @@ export default class Account_profile extends Component {
     try
     {
       event.preventDefault()
+      console.log(this.state)
       const payload = new FormData()
       payload.append("name_user",this.state.name_user)
       payload.append("image_user",this.state.image_user)

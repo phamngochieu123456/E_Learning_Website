@@ -24,7 +24,7 @@ accountctrl.verifyAccount = (req,res)=>{
     accountmd.verifyAccount((err,account)=>{
       if(err)
       {
-        res.json({success:false, data:err.message})
+        res.json({success:false, data:err})
       }
       else
       {
