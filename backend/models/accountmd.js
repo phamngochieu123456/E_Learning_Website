@@ -41,6 +41,24 @@ accountmd.getAccountById= async (result,Id) =>{
   }
 }
 
+accountmd.getUserById_Data = async (id_user)=>{
+  try
+  {
+    var sql = "select * from user where id_usert = \"" + id_user +"\" and active_user = 1"
+    var results = await query(sql)
+    const json = {success: true, data: results[0]}
+    const jsonstr = JSON.stringify(json)
+    return jsonstr
+  }
+  catch(err)
+  {
+    const json = {success: false, data: err.message}
+    const jsonstr = JSON.stringify(json)
+    return jsonstr
+  }
+}
+
+
 accountmd.verifyAccount = async (result,username,password) => {
   try
   {

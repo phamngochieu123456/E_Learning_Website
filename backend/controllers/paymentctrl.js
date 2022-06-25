@@ -1,6 +1,7 @@
 require("dotenv").config()
 var paymentctrl = module.exports
 const classmd = require("../models/classmd")
+const accountmd = require("../models/accountmd")
 const paypal = require('paypal-rest-sdk')
 const payoutsSdk = require('@paypal/payouts-sdk')
 const payPalClient = require('./payPalClient')
@@ -110,6 +111,7 @@ paymentctrl.successPay = async (req,res)=>{
       const listclasseslist = [[id_user,id_class,id_type_user,time_class]]
       const jsonstr = await classmd.insertLissClasses_Data(listclasseslist)
       console.log(jsonstr)
+      id_user = id_type_user = ""
       res.redirect("http://localhost:3000/payment-success")
     }
   });
@@ -117,6 +119,9 @@ paymentctrl.successPay = async (req,res)=>{
 
 async function buildRequestBody(includeValidationFailure) 
 {
+  const id_user = await classmd.getClassById_Data(id_class)
+  const user = await accountmd.getUserById_Data(id_user)
+
   let senderBatchId = "Test_sdk_" + Math.random().toString(36).substring(7);
   return {
     "sender_batch_header": {
@@ -132,7 +137,7 @@ async function buildRequestBody(includeValidationFailure)
         "currency": "USD",
         "value": "90"
       },
-      "receiver": "sb-3rt5l16906209@personal.example.com",
+      "receiver": user.paypal_user,
       "sender_item_id": "Test_txn_1"
     }]
   }
